@@ -1,0 +1,585 @@
+---
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Motor Controllers
+
+A motor controller sits between your robot's battery and a motor. It takes a command from the roboRIO (like "spin at 75% power") and converts it into the right voltage and current to actually move the motor. Without it, you'd have no way to control speed, direction, or how hard the motor pushes.
+
+This page covers the four motor controllers used on our robot:
+
+| Controller | Maker | Best For |
+|---|---|---|
+| [SPARK MAX](#spark-max) | REV Robotics | NEO / NEO 550 brushless motors |
+| [Thrifty Nova](#thrifty-nova) | The Thrifty Bot | NEO / NEO 550 / Thrifty Pulsar / Minion brushless motors |
+| [SPARK Flex](#spark-flex) | REV Robotics | NEO Vortex brushless motors |
+| [Talon FX](#talon-fx) | CTR Electronics | Kraken X60 / Falcon 500 motors |
+| [Talon FXS](#talon-fxs) | CTR Electronics | NEO / NEO 550 / Minion brushless motors |
+
+:::info How motor controllers talk to the roboRIO
+Most controllers support two communication methods:
+- **PWM** — a simple signal wire. Easy to set up but limited features (no feedback, no closed-loop control).
+- **CAN bus** — a two-wire network that lets multiple devices share one cable chain. Gives you encoder readings, current data, temperature, and proper closed-loop control. **Always prefer CAN on a real robot.**
+:::
+
+---
+
+## SPARK MAX
+
+> **Official docs:** https://docs.revrobotics.com/brushless/spark-max/overview
+
+The SPARK MAX (model REV-11-2158) is a brushless motor controller from REV Robotics. It handles both **brushless motors** (NEO, NEO 550) and **brushed DC motors**.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Operating voltage | 5.5V – 24V DC |
+| Absolute max voltage | 30V |
+| Continuous output current | 60A (up to 3 minutes) |
+| Communication | CAN, PWM |
+| Peak current (2 seconds) | 100A |
+| PWM signal range | 1000–2000 µs (1500 µs = neutral) |
+| Dimensions | 70 × 35 × 25.5 mm |
+| Weight | 113g |
+| Wire gauge | 12 AWG, 15 cm integrated leads |
+
+### Wiring
+
+:::danger Reversed polarity = dead controller
+The SPARK MAX has **no reverse polarity protection**. Connecting red to negative or black to positive will permanently destroy it. Double-check before powering on.
+:::
+
+**Power (red/black wires):**
+Connect the integrated 12 AWG wires to a Power Distribution Panel (PDP/PDH) channel. If you need to extend them, use 12 AWG or thicker wire with Anderson PowerPoles.
+
+**Motor (red/black/white wires — brushless):**
+- Red → Motor Phase A
+- Black → Motor Phase B
+- White → Motor Phase C
+
+The wire colors **must match** between controller and motor. If they don't, the motor won't spin and could be damaged. You also **must** plug the encoder cable into the ENCODER port on the controller — brushless motors won't run without it.
+
+**Motor (red/black wires — brushed):**
+Connect to the red (A) and black (B) outputs. Insulate the white (C) wire — don't cut it, just zip-tie it out of the way.
+
+**CAN and PWM wiring (JST-PH 4-pin connector):**
+CAN uses a JST-PH connector. Instead of crimping these connectors, a cots cable is used and the next connection is soldered on.
+
+| Pin | CAN | PWM |
+|---|---|---|
+| 1 & 3 | CAN High (Yellow) | Signal |
+| 2 & 4 | CAN Low (Green) | Ground |
+
+The two pairs are internally connected, so either pair works for daisy-chaining. Match colors end-to-end along the entire CAN bus. It is also recommended to connect the two pairs externally when using CAN, so an unplugged cable doesn't disconnect the rest of the bus.
+
+Using PWM, it is only required to use one signal and one ground pin.
+
+**USB-C:** Used for configuration and manual control only. The motor won't run on USB power alone — you need 12V on the main leads.
+
+### LED Status Codes
+
+The RGB LED on the side tells you exactly what the controller is doing. Learn these — they're your first diagnostic tool.
+
+<Tabs>
+  <TabItem value="normal" label="Normal Operation">
+
+| LED Color & Pattern | What It Means |
+|---|---|
+| Cyan blinking | Brushless mode, brake, waiting for signal |
+| Cyan solid | Brushless mode, brake, signal received |
+| Magenta blinking | Brushless mode, coast, waiting for signal |
+| Magenta solid | Brushless mode, coast, signal received |
+| Blue blinking | Brushed mode, brake, waiting for signal |
+| Blue solid | Brushed mode, brake, signal received |
+| Yellow blinking | Brushed mode, coast, waiting for signal |
+| Yellow solid | Brushed mode, coast, signal received |
+| Green blinking | Motor spinning forward (partial speed) |
+| Green solid | Motor spinning forward (full speed) |
+| Red blinking | Motor spinning reverse (partial speed) |
+| Red solid | Motor spinning reverse (full speed) |
+| Green/White blinking | Forward limit switch triggered |
+| Red/White blinking | Reverse limit switch triggered |
+
+  </TabItem>
+  <TabItem value="faults" label="Fault Codes">
+
+| LED Color & Pattern | What It Means |
+|---|---|
+| Orange/Blue slow blink | 12V power missing — controller only has USB power |
+| Orange/Magenta slow blink | Sensor fault — check encoder connections |
+| Orange/Cyan slow blink | Gate driver fault — internal circuit failure |
+| Orange/Yellow slow blink | CAN communication error |
+| Off (dark) | Corrupt firmware — needs Recovery Mode |
+| Orange/Green slow blink | Motor or motor controller overheat|
+
+  </TabItem>
+  <TabItem value="update" label="Update / Recovery">
+
+| LED Color & Pattern | What It Means |
+|---|---|
+| White/Magenta fast blink | Device identify (you clicked "Blink" in REV Hardware Client) |
+| White/Yellow blink | Firmware updating over CAN |
+| White/Blue blink | Firmware update retry |
+| Off (dark) | USB update mode or Recovery Mode |
+
+  </TabItem>
+</Tabs>
+
+### Faults & Troubleshooting
+
+- **Live faults** — active right now, clear automatically when the problem goes away
+- **Sticky faults** — recorded even after the problem clears (like a car's check engine light)
+
+Clear sticky faults in REV Hardware Client or with `spark.clearFaults()` in code.
+
+**Recovery Mode** (for corrupt firmware / dark LED):
+1. Disconnect all power from the controller.
+2. Hold down the **Mode Button** on the controller.
+3. While holding, plug in a USB-C cable.
+4. Release the button once it shows up in Recovery Mode in REV Hardware Client.
+5. Update to the latest firmware.
+6. Power-cycle and clear sticky faults.
+
+:::caution Recovery Mode wipes everything
+Recovering firmware erases all saved settings (PID gains, current limits, CAN ID). Write them down or export a config file first if you can.
+:::
+
+---
+
+## Thrifty Nova
+
+> **Official docs:** https://docs.thethriftybot.com/thrifty-nova
+
+The Thrifty Nova is made by **The Thrifty Bot** as a cost-effective brushless motor controller It supports **brushless motors** (NEO, NEO 550, Thrifty Pulsar, Minion) and **brushed DC motors**.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Operating voltage | 4V – 20V DC |
+| Continuous output current | 45A |
+| Peak current | 110A, 80A burst for 2 seconds |
+| Communication | CAN |
+| Dimensions | 2.2 in Diameter × .761 in |
+| Weight | .21 lbs |
+| Wire gauge | 12 AWG, 6in integrated leads |
+
+### Wiring
+
+**Power (red/black wires):**
+Connect the integrated 12 AWG wires to a Power Distribution Panel (PDP/PDH) channel. If you need to extend them, use 12 AWG or thicker wire with Anderson PowerPoles.
+
+**Motor (red/black/white wires — brushless):**
+- Red → Motor Phase A
+- Black → Motor Phase B
+- White → Motor Phase C
+
+The wire colors **must match** between controller and motor. If they don't, the motor won't spin and could be damaged. You also **must** plug the encoder cable into the ENCODER port on the controller — brushless motors won't run without it.
+
+**Motor (red/black wires — brushed):**
+Connect to the red (A) and black (B) outputs. Insulate the white (C) wire — don't cut it, just zip-tie it out of the way.
+
+**CAN and PWM wiring (JST-PH 4-pin connector):**
+CAN uses a JST-PH connector. Instead of crimping these connectors, a cots cable is used and the next connection is soldered on.
+
+| Pin | CAN | PWM |
+|---|---|---|
+| 1 & 3 | CAN High (Yellow) | Signal |
+| 2 & 4 | CAN Low (Green) | Ground |
+
+The two pairs are internally connected, so either pair works for daisy-chaining. Match colors end-to-end along the entire CAN bus. It is also recommended to connect the two pairs externally when using CAN, so an unplugged cable doesn't disconnect the rest of the bus.
+
+**USB-C:** Used for configuration and manual control only. The motor won't run on USB power alone — you need 12V on the main leads.
+
+### LED Status Codes
+
+The Thrifty Nova uses the same LED color language as REV controllers (it uses compatible firmware):
+
+| LED Color & Pattern | What It Means |
+|---|---|
+| Red alternating sides | Fatal fault |
+| Blue flashing | Encoder not connected or invalid |
+| Yellow alternating | Idle output |
+| Yellow flashing | No CAN |
+| Yellow solid | CAN connected but no control |
+| Green flashing | Forward motion |
+| Red flashing | Reverse motion |
+| Orange flashing slow | Overheated |
+| Orange flashing fast | Approaching Thermal limit |
+
+### Faults & Troubleshooting
+
+- **Live faults** — active right now, clear automatically when the problem goes away
+- **Sticky faults** — recorded even after the problem clears (like a car's check engine light)
+
+Clear sticky faults in Thifty Config or with `nova.clearErrors()` in code.
+
+---
+
+## SPARK Flex
+
+> **Official docs:** https://docs.revrobotics.com/brushless/spark-flex/overview
+
+The SPARK Flex is the next-generation version of the SPARK MAX, built specifically for the **NEO Vortex** motor. Using it's **docking interface**, it physically clips onto the Vortex instead of having loose motor wires, which makes wiring cleaner and more reliable. It also works with older NEO and NEO 550 motors using the SPARK Flex Dock adapter.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Operating voltage | 4.5V – 24V DC |
+| Absolute max voltage | 30V |
+| Continuous output current | 60A (up to 3 minutes) |
+| Peak current (2 seconds) | 100A |
+| Communication | CAN, PWM |
+| Output switching frequency | 20 kHz |
+| Through-bore mounting diameter | 16.5 mm |
+| Weight | 130g (with wires) |
+| Mounting | #10-32 screws on a 2-inch bolt circle |
+| Max mounting screw depth | 0.25 in — do not exceed |
+
+### Wiring
+
+**Power (red/black wires):**
+Connect the integrated 12 AWG wires to a Power Distribution Panel (PDP/PDH) channel. If you need to extend them, use 12 AWG or thicker wire with Anderson PowerPoles.
+
+**Motor connection:**
+The docking interface handles motor wiring automatically when you fully seat the NEO Vortex. Make sure both docking screws are completely tightened — a partially seated dock loses the electrical connection intermittently, which is very hard to diagnose.
+
+**CAN/PWM (four 26 AWG twisted wires, 450 mm):**
+Two ingrated pairs of wires come out of the motor. These wires are soldered to the next connection.
+
+| Color | CAN Mode | PWM Mode |
+|---|---|---|
+| Yellow | CAN High | Signal |
+| Green | CAN Low | Ground |
+
+The two pairs are internally connected, so either pair works for daisy-chaining. Match colors end-to-end along the entire CAN bus.
+
+Using PWM, it is only required to use one pair. Insulate the other pair — don't cut it, just zip-tie it out of the way.
+
+**Data Port (2×5 keyed, 0.05-inch pitch):**
+
+| Pin | Function |
+|---|---|
+| 2 | +5V output (max 500 mA) |
+| 3 | Analog input |
+| 4 | Forward limit switch |
+| 6 | Absolute encoder (duty cycle) |
+| 7 / 5 | External encoder A / B |
+| 8 | Reverse limit switch |
+| 9 | External encoder index |
+| 10 | Ground |
+
+Use the Breakout Cable (REV-11-2853) or Pigtail Cable (REV-11-2852) to access data port pins cleanly.
+
+**USB-C:** Used for configuration and manual control only. The motor won't run on USB power alone — you need 12V on the main leads.
+
+### LED Status Codes
+
+<Tabs>
+  <TabItem value="normal" label="Normal Operation">
+
+| LED Color & Pattern | What It Means |
+|---|---|
+| Cyan blinking | Brushless mode, brake, waiting for signal |
+| Cyan solid | Brushless mode, brake, signal received |
+| Magenta blinking | Brushless mode, coast, waiting for signal |
+| Magenta solid | Brushless mode, coast, signal received |
+| Blue blinking | Brushed mode, brake, waiting for signal |
+| Blue solid | Brushed mode, brake, signal received |
+| Yellow blinking | Brushed mode, coast, waiting for signal |
+| Yellow solid | Brushed mode, coast, signal received |
+| Green blinking | Motor spinning forward (partial speed) |
+| Green solid | Motor spinning forward (full speed) |
+| Red blinking | Motor spinning reverse (partial speed) |
+| Red solid | Motor spinning reverse (full speed) |
+| Green/White blinking | Forward limit switch triggered |
+| Red/White blinking | Reverse limit switch triggered |
+
+  </TabItem>
+  <TabItem value="faults" label="Fault Codes">
+
+| LED Color & Pattern | What It Means |
+|---|---|
+| Orange/Blue slow blink | 12V power missing — controller only has USB power |
+| Orange/Magenta slow blink | Sensor fault — check encoder connections |
+| Orange/Cyan slow blink | Gate driver fault — internal circuit failure |
+| Orange/Yellow slow blink | CAN communication error |
+| Off (dark) | Corrupt firmware — needs Recovery Mode |
+| Orange/Green slow blink | Motor or motor controller overheat|
+
+  </TabItem>
+  <TabItem value="update" label="Update / Recovery">
+
+| LED Color & Pattern | What It Means |
+|---|---|
+| White/Magenta fast blink | Device identify (you clicked "Blink" in REV Hardware Client) |
+| White/Yellow blink | Firmware updating over CAN |
+| White/Blue blink | Firmware update retry |
+| Off (dark) | USB update mode or Recovery Mode |
+
+  </TabItem>
+</Tabs>
+
+### Faults & Troubleshooting
+
+Sticky faults stay recorded even after the problem is fixed — they work like a car's check engine light. Clear them in REV Hardware Client or with `spark.clearFaults()` in code.
+
+**Recovery Mode** (for corrupt firmware / dark LED):
+1. Disconnect all power from the controller.
+2. Hold down the **Mode Button** on the controller.
+3. While holding, plug in a USB-C cable.
+4. Release the button once it shows up in Recovery Mode in REV Hardware Client.
+5. Update to the latest firmware.
+6. Power-cycle and clear sticky faults.
+
+:::caution Recovery Mode wipes everything
+Recovering firmware erases all saved settings (PID gains, current limits, CAN ID). Write them down or export a config file first if you can.
+:::
+
+---
+
+## Talon FX
+
+> **Official docs:** https://v6.docs.ctr-electronics.com/en/stable/docs/hardware-reference/talonfx/index.html
+
+The Talon FX isn't a standalone box — it's a motor controller **built directly into** CTR Electronics motor products. The most common ones in FRC are:
+
+- **Kraken X60** — full-size, high-power brushless motor
+- **Kraken X44** — compact, lower power version of the X60
+
+Because the controller is integrated, there's no separate box to mount. The Talon FX is configured and programmed using **Phoenix 6** (the CTR software suite) and **Phoenix Tuner X** (the configuration app).
+
+### Specifications
+
+<Tabs>
+  <TabItem value="x60" label="Kraken X60">
+
+    | Parameter | Standard Mode | FOC Mode (Pro License) |
+    |---|---|---|
+    | Communication | CAN, PWM | CAN, PWM |
+    | Free speed | 6,065 RPM | 5,785 RPM |
+    | Free current | 2 A | 2 A |
+    | Stall torque | 7.16 N·m | 9.36 N·m |
+    | Peak power | 1,137 W | 1,418 W |
+    | Peak efficiency | 86% at 30A | 84% at 40A |
+    | Stall current | 374 A | 476 A |
+    | Voltage range | 6V – 24V nominal | same |
+    | Weight | 1.2 lbs | — |
+    | Diameter | 60 mm (63.5 mm with wire bump) | — |
+    | Mounting | 11× #10-32 on 2-inch bolt circle.  | — |
+    | Output shaft | SplineXS (non-replaceable) | — |
+
+    </TabItem>
+    <TabItem value="x44" label="Kraken X44">
+
+    | Parameter | Standard Mode | FOC Mode (Pro License) |
+    |---|---|---|
+    | Communication | CAN, PWM | CAN, PWM |
+    | Free speed | 7,758RPM | 7,368 RPM |
+    | Free current | 3 A | 3 A |
+    | Stall torque | 4.11 N·m | 5.01 N·m |
+    | Peak power | 835 W | 966 W |
+    | Peak efficiency | 81% at 30A | 81% at 32A |
+    | Stall current | 279 A | 329 A |
+    | Voltage range | 6V – 24V nominal | same |
+    | Weight | 0.75 lbs | — |
+    | Diameter | 44 mm (47.4 mm with wire bump) | — |
+    | Mounting | 11× #10-32 on 1.375-inch bolt circle | — |
+    | Output shaft | SplineXS (non-replaceable) | — |
+
+    </TabItem>
+</Tabs>
+
+:::info What is FOC?
+FOC (Field-Oriented Control) is an advanced motor control algorithm that gives you more torque and efficiency. It requires a **CTRE Pro license** on the device. Standard (non-FOC) mode is free and works great for most applications.
+:::
+
+### Wiring
+
+:::danger Use the correct screw length
+Using longer screws than specified on either the power or CAN terminals will physically damage the integrated controller. Use only the included hardware.
+:::
+
+**Power terminals:**
+- Screw size: #6-32 × ¼ in (IP10/T10 Torx driver)
+- Torque: 0.9 N·m — snug but don't strip it
+- Wire must be crimped with cable lugs appropriate for the wire gauge and a #6 size screw
+- 10 AWG is preferred, 12 awg is acceptable. Red wire for positive, and black wire for negative
+
+**CAN terminals:**
+- Screw size: #4-40 × ¼ in (IP8/T8 Torx driver)
+- Torque: 0.6 N·m
+- Wire should be crimped with cable lugs appropriate for the wire gauge and a #6 size screw
+- 22 awg, green and yellow, twisted pair wire must be used. Always connect two can pairs to allow daisy chaining.
+
+**CAN bus color code — always:**
+
+| Wire Color | Signal |
+|---|---|
+| Yellow | CAN High |
+| Green | CAN Low |
+
+Match colors end-to-end along the entire CAN bus
+
+### LED Status Codes
+
+The Talon FX has two LEDs that work together to show status.
+
+<Tabs>
+  <TabItem value="disabled" label="Disabled Codes">
+
+    | LED Pattern | What It Means | What To Do |
+    |---|---|---|
+    | Off | No power | Check power wires and breaker |
+    | Alternating red (2 LEDs) | No CAN signal | Check Yellow/Green wiring, check for swapped wires |
+    | Alternating orange | CAN detected, no Phoenix program | Deploy your robot code |
+    | Both blink orange simultaneously | Disabled, CAN active | Enable the robot or send a control request |
+
+    </TabItem>
+    <TabItem value="enabled" label="Enabled Codes">
+
+    | LED Pattern | What It Means |
+    |---|---|
+    | Both solid orange simultaneously | Neutral Output |
+    | Both green (blink rate = speed) | Spinning forward |
+    | Both red (blink rate = speed) | Spinning reverse |
+    | Offset red/off | Output limited (soft or hard limit) |
+
+    </TabItem>
+    <TabItem value="special" label="Special Codes">
+
+    | LED Pattern | What It Means | What To Do |
+    |---|---|---|
+    | Offset orange/off | Thermal cutoff — overheated | Let it cool; configure current limits to prevent recurrence |
+    | Alternating red/green | Unlicensed Pro command | Use standard commands or license the device |
+    | Alternating red/green | Damaged Hardware | Use Tuner X to confirm, contact CTRE |
+    | Single LED alternating green/orange | Talon FX in bootloader | Perform firmware update |
+
+    </TabItem>
+</Tabs>
+
+:::info Phoenix Tuner X also shows an animated LED gif for any Talon FX — useful when the motor is buried somewhere hard to see on the robot.
+:::
+
+### Faults & Troubleshooting
+
+Phoenix 6 tracks two types of faults:
+- **Live faults** — active right now, clear automatically when the problem goes away
+- **Sticky faults** — recorded even after the problem clears (like a car's check engine light)
+
+Clear sticky faults in Phoenix Tuner X ("Clear Faults" button), or in code:
+
+```java
+talon.clearStickyFaults();
+```
+
+**Self-Test Snapshot** in Phoenix Tuner X shows a full snapshot of the device state with values, units, and fault tables — very useful for diagnosing weird behavior at the field.
+
+---
+
+
+## Talon FXS
+
+> **Official docs:** https://v6.docs.ctr-electronics.com/en/stable/docs/hardware-reference/talonfxs/index.html
+
+The Talon FXS is a brushless motor controller from CTR Electronics. It handles both **brushless motors** (NEO, NEO 550) and **brushed DC motors**.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Operating voltage | 6V – 24V DC |
+| Absolute max voltage | 27V |
+| Continuous output current | 60A |
+| Communication | CAN, PWM |
+| Peak current (2 seconds) | 120A |
+| PWM signal range | 1000–2000 µs (1500 µs = neutral) |
+| Dimensions | 1.43 x 1.16 x 3.06 in |
+| Weight | 0.25 lbs |
+
+### Wiring
+
+:::danger Use the correct screw length
+Using longer screws than specified on either the power or CAN terminals will physically damage the integrated controller. Use only the included hardware.
+:::
+
+**Power terminals:**
+- Screw size: #6-32 × ¼ in (IP10/T10 Torx driver)
+- Torque: 0.9 N·m — snug but don't strip it
+- Wire must be crimped with cable lugs appropriate for the wire gauge and a #6 size screw
+- 12 awg or larger must be used. Red wire for positive, and black wire for negative
+
+**CAN terminals:**
+- Screw size: #4-40 × ¼ in (IP8/T8 Torx driver)
+- Torque: 0.6 N·m
+- Wire should be crimped with cable lugs appropriate for the wire gauge and a #6 size screw
+- 22 awg, green and yellow, twisted pair wire must be used. Always connect two can pairs to allow daisy chaining.
+
+**CAN bus color code — always:**
+
+| Wire Color | Signal |
+|---|---|
+| Yellow | CAN High |
+| Green | CAN Low |
+
+Match colors end-to-end along the entire CAN bus
+
+### LED Status Codes
+
+The Talon FX has two LEDs that work together to show status.
+
+<Tabs>
+  <TabItem value="disabled" label="Disabled Codes">
+
+    | LED Pattern | What It Means | What To Do |
+    |---|---|---|
+    | Off | No power | Check power wires and breaker |
+    | Alternating red (2 LEDs) | No CAN signal | Check Yellow/Green wiring, check for swapped wires |
+    | Alternating orange | CAN detected, no Phoenix program | Deploy your robot code |
+    | Both blink orange simultaneously | Disabled, CAN active | Enable the robot or send a control request |
+
+    </TabItem>
+    <TabItem value="enabled" label="Enabled Codes">
+
+    | LED Pattern | What It Means |
+    |---|---|
+    | Both solid orange simultaneously | Neutral Output |
+    | Both green (blink rate = speed) | Spinning forward |
+    | Both red (blink rate = speed) | Spinning reverse |
+    | Offset red/off | Output limited (soft or hard limit) |
+
+    </TabItem>
+    <TabItem value="special" label="Special Codes">
+
+    | LED Pattern | What It Means | What To Do |
+    |---|---|---|
+    | Offset orange/off | Thermal cutoff — overheated | Let it cool; configure current limits to prevent recurrence |
+    | Alternating red/green | Unlicensed Pro command | Use standard commands or license the device |
+    | Alternating red/green | Damaged Hardware | Use Tuner X to confirm, contact CTRE |
+    | Single LED alternating green/orange | Talon FX in bootloader | Perform firmware update |
+
+    </TabItem>
+</Tabs>
+
+:::info Phoenix Tuner X also shows an animated LED gif for any Talon FX — useful when the motor is buried somewhere hard to see on the robot.
+:::
+
+### Faults & Troubleshooting
+
+Phoenix 6 tracks two types of faults:
+- **Live faults** — active right now, clear automatically when the problem goes away
+- **Sticky faults** — recorded even after the problem clears (like a car's check engine light)
+
+Clear sticky faults in Phoenix Tuner X ("Clear Faults" button), or in code:
+
+```java
+talon.clearStickyFaults();
+```
+
+**Self-Test Snapshot** in Phoenix Tuner X shows a full snapshot of the device state with values, units, and fault tables — very useful for diagnosing weird behavior at the field.
+
+---
