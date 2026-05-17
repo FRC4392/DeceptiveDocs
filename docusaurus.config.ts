@@ -21,14 +21,14 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://docs.deceivers.com',
+  url: 'https://docs.deceivers.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'The Deceivers', // Usually your GitHub org/user name.
+  organizationName: 'FRC4392', // Usually your GitHub org/user name.
   projectName: 'DeceptiveDocs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
