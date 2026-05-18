@@ -1,0 +1,716 @@
+---
+title: Electrical Connectors
+---
+
+# Electrical Connectors
+
+This page is a reference for all electrical connectors used on our robots. It covers specifications, crimping tools, installation procedures, and common use cases. Sections are self-contained — you do not need to read them in order.
+
+| Connector | Type | Max Current | Max Voltage | Wire Range |
+|---|---|---|---|---|
+| [Anderson PowerPole SB 120](#anderson-powerpole-sb-120) | High-power single-pole | 120A | 600V AC / 900V DC | 4–2/0 AWG |
+| [Anderson PowerPole SB 50](#anderson-powerpole-sb-50) | High-power single-pole | 50A | 50V DC | 6–10 AWG |
+| [Anderson PowerPole PP15/30/45](#anderson-powerpole-pp153045) | Power single-pole, stackable | 15–45A | 50V DC | 10–20 AWG |
+| [Cable Lugs (Ring Terminals)](#cable-lugs-ring-terminals) | Bolted ring terminal | — | — | varies |
+| [Molex SL](#molex-sl) | Signal multi-conductor | 3A/pin | 250V AC | 22–28 AWG |
+| [Molex Microfit+](#molex-microfit) | Signal multi-conductor | 8.5A/pin | 600V | 18–30 AWG |
+| [JST-PH](#jst-ph) | Signal multi-conductor | 2A/pin | 100V AC | 24–32 AWG |
+| [Wire Ferrules](#wire-ferrules) | Wire end sleeve | — | — | varies |
+| [Weidmuller LSF](#weidmuller-lsf) | Push-in spring-cage, wire-to-board | varies | varies | varies |
+| [RJ45 Ethernet](#rj45-ethernet) | Network plug | — | — | 22–26 AWG |
+| [Wago 221](#wago-221) | Lever splice | 32A | 450V | 12–24 AWG |
+| [CAN Lever Connector](#can-lever-connector) | 2-pos lever splice, CAN-coded | 24A | 450V | 12–24 AWG |
+| [Wire-to-Wire Solder Splice](#wire-to-wire-solder-splice) | Permanent inline joint | — | — | varies |
+| [Wire-to-Board Solder Splice](#wire-to-board-solder-splice) | Permanent PCB joint | — | — | varies |
+| [USB-A Plug](#usb-a-plug) | USB Type-A | — | 5V | — |
+| [USB-C Plug](#usb-c-plug) | USB Type-C | — | 20V | — |
+
+---
+
+## Anderson PowerPole SB 120
+
+> **Manufacturer docs:** [Anderson Power Products — SB 120](https://www.andersonpower.com/us/en/products/sb120.html)
+
+The SB 120 is a heavy-duty single-pole connector for high-current battery and main power wiring. Both halves use the same housing and contact — the connector is genderless. Polarity must be maintained by convention (color-coded housings or labeling) since nothing physically prevents reversed insertion.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Anderson Power Products |
+| Type | Single-pole, genderless |
+| Contact sizes available | 120A (variants for 2/0, 1, 2, and 4 AWG) |
+| Max continuous current | 120A |
+| Max voltage | 600V AC / 900V DC |
+| Wire range | 4 AWG – 2/0 AWG |
+| Mating cycles | 1,000+ |
+
+### Crimping Tool
+
+Hydraulic crimping tool. Select the die matched to the contact size and wire gauge. Refer to the Anderson die selection chart for the specific contact part number.
+
+### Installation
+
+#### Installing the Contact on a Wire
+
+1. Strip approximately 13 mm (½ in) of insulation from the wire end.
+2. Select the correct contact variant for your wire gauge.
+3. Slide the contact onto the stripped wire so all strands are fully inside the barrel and none are outside.
+4. Crimp using the hydraulic crimper with the correct die.
+5. Inspect: the barrel should be uniformly compressed, and the wire should not pull out with hand force.
+6. Insert the crimped contact into the SB 120 housing by pushing it straight in from the rear until the spring latch clicks.
+7. Tug gently to confirm the contact is locked.
+
+#### Connecting to the Mating Connector
+
+1. Align the two SB 120 housings — the guide tab on one slides into the slot on the other.
+2. Push firmly until both housings snap together and the latch engages.
+3. To disconnect: depress the latch tab and pull the housings apart.
+
+### Common Uses
+
+- Battery main power leads
+- High-current bus connections requiring more than 50A
+
+---
+
+## Anderson PowerPole SB 50
+
+> **Manufacturer docs:** [Anderson Power Products — SB 50](https://www.andersonpower.com/us/en/products/sb50.html)
+
+The SB 50 is a single-pole connector for medium-to-high current power wiring. Like the SB 120, it is genderless — polarity is maintained by convention (red for positive, black for negative).
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Anderson Power Products |
+| Type | Single-pole, genderless |
+| Contact sizes available | 50A (variants for 6 AWG and 10 AWG) |
+| Max continuous current | 50A |
+| Max voltage | 50V DC |
+| Wire range | 6 AWG – 10 AWG |
+| Mating cycles | 1,000+ |
+
+### Crimping Tool
+
+Hydraulic crimping tool. Select the die matched to the contact size and wire gauge.
+
+### Installation
+
+#### Installing the Contact on a Wire
+
+1. Strip approximately 10 mm (⅜ in) of insulation from the wire end.
+2. Select the correct contact for your wire gauge.
+3. Slide the contact onto the stripped wire so all strands fill the barrel completely.
+4. Crimp using the hydraulic crimper with the correct die.
+5. Inspect: the barrel should be uniformly compressed, and the wire should not pull out.
+6. Insert the crimped contact into the SB 50 housing until the spring latch clicks.
+7. Tug gently to confirm the contact is locked.
+
+#### Connecting to the Mating Connector
+
+1. Align the two SB 50 housings — the guide tab on one slides into the slot on the other.
+2. Push firmly until both housings snap together.
+3. To disconnect: depress the latch tab and pull apart.
+
+### Common Uses
+
+- Motor controller power connections
+- Battery connection to Power Distribution
+- Any 12V power connection requiring up to 50A
+
+---
+
+## Anderson PowerPole PP15/30/45
+
+> **Manufacturer docs:** [Anderson Power Products — PowerPole PP15–45](https://www.andersonpower.com/us/en/products/pp15-45.html)
+
+The PP series are compact, stackable, single-pole connectors for moderate-current wiring. PP15, PP30, and PP45 all use the same plastic housing — the current rating is determined by the contact installed. The connectors are genderless and are typically used in ganged pairs or triples.
+
+### Specifications
+
+| Contact | Max Current | Wire Range |
+|---|---|---|
+| PP15 | 15A | 20–16 AWG |
+| PP30 | 30A | 16–12 AWG |
+| PP45 | 45A | 12–10 AWG |
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Anderson Power Products |
+| Type | Single-pole, genderless, stackable |
+| Max voltage | 50V DC |
+| Mating cycles | 1,000+ |
+
+### Crimping Tool
+
+Anderson **TRIcrimp** tool. This tool crimps the wire barrel and the insulation strain-relief grip in a single squeeze.
+
+### Installation
+
+#### Installing the Contact on a Wire
+
+1. Strip approximately 8 mm (5/16 in) of insulation from the wire end.
+2. Select the correct contact for your wire gauge and current requirement.
+3. Insert the stripped wire into the contact barrel so the conductor fills the barrel and the insulation sits against the strain-relief wings.
+4. Place the contact in the TRIcrimp at the position marked for that contact type.
+5. Squeeze the TRIcrimp tool fully to simultaneously crimp the barrel and close the strain-relief wings.
+6. Inspect: the wire should not pull out, and both the barrel and strain-relief wings should be evenly closed.
+7. Insert the crimped contact into the PP housing from the rear until the retention latch clicks. The contact should sit flush.
+
+#### Connecting to the Mating Connector
+
+1. Align the two PP housings — the front tab on each mates with the slot on the other.
+2. Push together until fully seated.
+3. To disconnect: squeeze the side latches inward simultaneously and pull apart.
+
+### Common Uses
+
+- Motor phase wires (three PP connectors ganged together for 3-phase motor connections)
+- 12V power connections requiring up to 45A
+
+---
+
+## Cable Lugs (Ring Terminals)
+
+Cable lugs (ring terminals) are crimped wire terminations secured to a screw post or stud. They provide a robust, low-resistance connection at bolted joints.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Type | Ring terminal |
+| Wire range | Matched to wire gauge and lug series |
+| Ring hole size | Matched to fastener (#4, #6, #8, ¼", etc.) |
+| Material | Copper or tinned copper |
+
+### Crimping Tool
+
+Hydraulic crimping tool. Use the die matched to the wire gauge. An undersized die under-compresses and creates a high-resistance joint; an oversized die damages the lug.
+
+### Installation
+
+#### Installing the Lug on a Wire
+
+1. Select a lug with the correct wire gauge range and hole size for the target fastener.
+2. Strip insulation to match the lug barrel length — typically 12–16 mm for power lugs.
+3. Twist the strands together lightly to keep them bundled.
+4. Insert the stripped wire fully into the lug barrel — all strands must be inside the barrel with none hanging outside.
+5. Crimp with the hydraulic crimper using the die for the wire gauge.
+6. Inspect: the barrel should be uniformly compressed and the wire should not pull out.
+
+#### Connecting to a Terminal
+
+1. Place the ring over the screw or stud.
+2. Install any required washer and fasten the nut or screw.
+
+:::danger Torque to spec
+Always torque the fastener to the manufacturer's specified value. Under-torqued fasteners will loosen from vibration and can cause intermittent connections or arcing. Over-torqued fasteners can crack the lug or strip the thread.
+:::
+
+### Common Uses
+
+- Motor controller power terminals (Talon FX, Talon FXS)
+- CAN bus terminals (Talon FX, Talon FXS)
+- Power Distribution stud connections
+
+---
+
+## Molex SL
+
+> **Manufacturer docs:** [Molex — SL Series](https://www.molex.com/en-us/products/connectors/wire-to-board-connectors/sl-series)
+
+Molex SL connectors are 2.54 mm pitch connectors used for low-current signal and power connections. Available in male (housing + contacts) and female (receptacle + contacts) versions in 2, 3, and 4 conductor counts.
+
+:::warning Use gold-plated contacts only
+Standard tin-plated Molex SL contacts can corrode the robot controller's input pins over time. **Always use gold-plated contacts** when connecting to the robot controller or any sensitive electronics.
+:::
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Molex |
+| Series | SL (2139) |
+| Type | Wire-to-board / wire-to-wire, polarized |
+| Pitch | 2.54 mm |
+| Conductors available | 2, 3, 4 (male and female) |
+| Max current per contact | 3A |
+| Max voltage | 250V AC (600V UL) |
+| Wire range | 22–28 AWG |
+| Contact plating | Tin (avoid on robot controller) or Gold (required for robot controller) |
+
+### Crimping Tool
+
+Molex hand crimper **part number 638118700**.
+
+### Installation
+
+#### Installing the Contact on a Wire
+
+1. Strip approximately 2 mm of insulation from the wire end.
+2. Select the correct gold-plated contact for the wire gauge.
+3. Place the contact in the crimper at the position specified in the crimper instructions.
+4. Insert the wire into the contact so the conductor sits in the wire barrel and the insulation sits in the insulation grip.
+5. Squeeze the crimper fully until it releases.
+6. Inspect: the wire conductor should be visible at the front of the wire barrel, both crimp wings should be uniformly closed, and the wire should not pull out.
+7. Insert the contact into the housing from the rear in the correct cavity, matching the keying. Push until you hear a click.
+8. Tug gently to confirm the contact is locked.
+
+#### Connecting to the Mating Connector
+
+1. Align the male and female housings — the polarization key prevents incorrect orientation.
+2. Push until both housings seat fully and latch.
+3. To disconnect: depress the latch tab on the female/receptacle housing and pull apart.
+
+### Common Uses
+
+- PWM signal cables
+- Robot controller signal connections (use gold contacts)
+- Sensor wiring
+
+---
+
+## Molex Microfit+
+
+> **Manufacturer docs:** [Molex — Micro-Fit+ Connectors](https://www.molex.com/en-us/products/connectors/wire-to-board-connectors/micro-fit-connectors)
+
+Molex Microfit+ is a 3.0 mm pitch connector series for higher-current connections than the SL series. We use the **male plug, 4-pin** variant.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Molex |
+| Series | Microfit+ |
+| Type | Wire-to-board, polarized |
+| Pitch | 3.0 mm |
+| Conductors | 4 (male plug only) |
+| Max current per contact | 8.5A |
+| Max voltage | 600V |
+| Wire range | 18–30 AWG |
+
+### Crimping Tool
+
+Molex hand crimper **part number 2133094400**.
+
+### Installation
+
+#### Installing the Contact on a Wire
+
+1. Strip approximately 2.5 mm of insulation from the wire end.
+2. Place the contact in the Molex 2133094400 crimper at the correct position for the wire gauge.
+3. Insert the wire so the conductor fills the wire barrel and the insulation reaches the insulation grip.
+4. Squeeze the crimper fully until it cycles through and releases.
+5. Inspect: both the wire barrel and insulation grip should be uniformly closed with no strands outside the barrel.
+6. Insert the contact into the 4-pin male housing from the rear in the correct cavity. Push until you hear a click.
+7. Tug gently to confirm the contact is locked.
+
+#### Connecting to the Mating Connector
+
+1. Align the male plug with the female receptacle — the polarization key prevents incorrect insertion.
+2. Push firmly until the housings latch together.
+3. To disconnect: depress the latch tab and pull apart.
+
+### Common Uses
+
+- Higher-current signal connections
+- Connections to devices with Microfit+ receptacles on their boards
+
+---
+
+## JST-PH
+
+> **Manufacturer docs:** [JST — PH Connector Series](https://www.jst.com/products/crimp-style-connectors-wire-to-board-type/ph-connector/)
+
+JST-PH connectors are 2.0 mm pitch low-current connectors. We use the **male plug, 6-conductor** variant. These connectors are commonly found on motor encoder cables and CAN bus connections.
+
+:::tip Prefer premade cables
+JST-PH contacts are very small and difficult to crimp reliably. Use premade JST-PH cables whenever available rather than hand-crimping.
+:::
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | JST |
+| Series | PH |
+| Type | Wire-to-board, polarized |
+| Pitch | 2.0 mm |
+| Conductors | 6 (male plug only) |
+| Max current per contact | 2A |
+| Max voltage | 100V AC |
+| Wire range | 24–32 AWG |
+
+### Crimping Tool
+
+iCrimp **SN-28B** ratcheting hand crimper.
+
+### Installation
+
+#### Installing the Contact on a Wire
+
+1. Strip approximately 1.5–2 mm of insulation. Over-stripping risks short circuits; under-stripping creates a weak crimp.
+2. Place the JST-PH contact in the SN-28B crimper at the die position for JST-PH contacts.
+3. Insert the wire so the conductor is in the wire barrel and the insulation just reaches the insulation grip.
+4. Squeeze the crimper fully and allow the ratchet to release.
+5. Inspect: wire barrel and insulation grip should be evenly closed, conductor should be visible at the front, and no strands should be outside the barrel.
+6. Insert each contact into the 6-pin male housing from the rear in the correct position. Push until you hear a click.
+7. Tug gently to confirm each contact is locked.
+
+#### Connecting to the Mating Connector
+
+1. Align the male plug with the female receptacle — the connector is keyed and only inserts one way.
+2. Push until the latch clicks.
+3. To disconnect: depress the latch tab and pull straight out.
+
+### Common Uses
+
+- Motor encoder cables (SPARK MAX, Thrifty Nova encoder ports)
+- CAN bus connections on motor controllers (premade cables preferred)
+- Sensor wiring where the device provides a JST-PH port
+
+---
+
+## Wire Ferrules
+
+Wire ferrules are cylindrical metal sleeves crimped onto the end of a stranded wire to bundle the strands into a solid, pin-like end. They prevent frayed strands from causing shorts and ensure a reliable connection in spring-cage or screw terminals.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Type | End-sleeve ferrule, insulated or bare |
+| Wire range | Matched to wire gauge |
+| Material | Tinned copper sleeve with insulated collar |
+| Color coding | Insulated ferrules follow IEC 60947 color standard by gauge |
+
+### Crimping Tool
+
+Phoenix Contact **CrimpFox 6** hand crimper. This tool creates a square cross-section crimp, which is the preferred form for spring-cage terminals.
+
+### Installation
+
+#### Installing the Ferrule on a Wire
+
+1. Select the ferrule that matches your wire gauge and the required insertion length for the target terminal.
+2. Strip insulation to the length of the ferrule barrel — typically 8–10 mm for most signal sizes.
+3. Insert the stripped wire fully into the ferrule barrel so all strands are captured inside.
+4. Place the loaded ferrule in the CrimpFox 6 at the position for that wire gauge.
+5. Squeeze the crimper fully.
+6. Inspect: the ferrule should be uniformly and squarely compressed, all strands should be captured, and the wire should not pull out.
+
+#### Connecting to a Terminal
+
+Insert the ferrule end into the target terminal and secure it per that terminal's instructions (spring-cage push-in, lever actuation, or screw).
+
+### Common Uses
+
+- Required for all Weidmuller LSF connections
+- Any stranded wire connecting to a spring-cage or screw terminal block
+
+---
+
+## Weidmuller LSF
+
+> **Manufacturer docs:** [Weidmuller — LSF Series](https://www.weidmuller.com/en/products/connectors/pcb_terminal_blocks/lsf.html)
+
+Weidmuller LSF connectors are push-in spring-cage terminal blocks that mount on a PCB. The connector accepts a ferrule-terminated wire and holds it via an internal spring — no screw or tool required for insertion.
+
+:::warning Ferrules required
+Never insert bare stranded wire directly into an LSF connector. Always terminate with a wire ferrule first. Bare stranded wire risks frayed strands bridging adjacent terminals and creating shorts.
+:::
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Weidmuller |
+| Series | LSF |
+| Type | Push-in spring-cage, wire-to-board |
+| Connection method | Push-in (ferrule required) |
+| Wire range | Printed on housing — check the specific part number |
+| Max voltage / current | Printed on housing |
+
+### Installation
+
+#### Connecting a Wire to the Connector
+
+1. Terminate the wire with a wire ferrule (see [Wire Ferrules](#wire-ferrules)).
+2. Identify the correct slot in the connector — slots are typically labeled on the housing or PCB silkscreen.
+3. Push the ferrule straight into the slot until it stops. The spring grips it automatically — no tool needed.
+4. Tug gently to confirm the wire is held.
+5. To remove: insert a small flat-blade screwdriver into the actuation slot next to the wire entry, press to open the spring, and pull the wire out.
+
+### Common Uses
+
+- Connections to PCB-mounted terminal blocks on control boards
+- Field-installable signal and power wiring on custom PCBs
+
+---
+
+## RJ45 Ethernet
+
+> **Standard:** TIA-568C
+
+RJ45 (8P8C) is the standard connector for Ethernet networking. It connects switches, robot controllers, cameras, and other networked devices.
+
+:::tip Prefer premade cables
+Crimping RJ45 connectors reliably requires practice and a quality crimper. Premade Cat5e or Cat6 patch cables are strongly preferred. Only crimp your own cable when a custom length is required.
+:::
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Standard | 8P8C (8 Position, 8 Contact) |
+| Type | Plug (field-crimp) |
+| Pin count | 8 |
+| Max cable rating | Up to Cat6 (depends on cable quality) |
+| Wire range | 22–26 AWG |
+| Wire type | Stranded (patch cables), Solid (fixed runs) |
+| Wiring standard | T568B (preferred) |
+
+### Crimping Tool
+
+RJ45-specific ratcheting crimper with an 8P8C die. Do not use a telephone crimper — the die is different.
+
+### Installation
+
+#### Installing the Connector on a Cable
+
+1. Cut the cable cleanly and square.
+2. Remove approximately 25 mm of the outer jacket without nicking the inner conductors.
+3. Untwist the pairs and straighten all 8 conductors.
+4. Arrange conductors in T568B order from left to right (with the tab facing down and contacts facing you): White/Orange, Orange, White/Green, Blue, White/Blue, Green, White/Brown, Brown.
+5. Hold the order and trim all conductors evenly so approximately 13 mm of conductor extends beyond the jacket.
+6. Slide into the RJ45 plug — each conductor must reach the front of its channel and be visible through the end of the plug.
+7. Crimp with the RJ45 crimper to drive the 8 contacts into the conductors.
+8. Test with a cable tester before putting the cable in service.
+
+#### Connecting to the Mating Connector
+
+1. Align the plug with the RJ45 jack — the locking tab must face down toward the tab slot on the jack.
+2. Push firmly until the tab clicks.
+3. To disconnect: press the locking tab down and pull the plug straight out.
+
+### Common Uses
+
+- Robot controller to network switch
+- Camera connections
+- Any device with an Ethernet port
+
+---
+
+## Wago 221
+
+> **Manufacturer docs:** [Wago — 221 Series](https://www.wago.com/us/wire-splicing-connectors/compact-splicing-connector/p/221-412)
+
+Wago 221 connectors are compact lever-actuated wire splice connectors. They require no crimping or tools — a lever opens the contact, the wire inserts, and the lever closes to lock.
+
+:::caution For temporary use only
+Wago 221 connectors are for **quick fixes and temporary wiring only**. Do not use them in permanent robot wiring. Permanent connections must use soldering or a properly crimped connector.
+:::
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Wago |
+| Series | 221 |
+| Type | Lever-actuated wire splice |
+| Conductor positions | 2, 3, or 5 position variants |
+| Max current | 32A (12 AWG) |
+| Max voltage | 450V |
+| Wire range | 24–12 AWG |
+| Wire types accepted | Solid, stranded, ferrule-terminated |
+
+### Installation
+
+No pre-installation on the wire is required — the lever mechanism is the connection.
+
+#### Connecting Wires
+
+1. Lift the orange lever on the target slot to the open position.
+2. Strip approximately 11 mm of insulation from the wire.
+3. Insert the stripped wire into the open slot until it bottoms out.
+4. Push the lever back down to clamp the wire.
+5. Tug gently to confirm the wire is held.
+6. Repeat for each slot.
+
+### Common Uses
+
+- Temporary repairs during competitions
+- Quick test connections during troubleshooting
+- **Not for permanent use**
+
+---
+
+## CAN Lever Connector
+
+The CAN lever connector is a 2-position lever-actuated wire splice connector color-coded green and yellow, used for CAN bus connections. It functions the same as the Wago 221 but has a fixed 2-position format matched to CAN bus wire colors (CAN High = yellow, CAN Low = green).
+
+:::caution For temporary use only
+Like the Wago 221, this connector is for **quick fixes and temporary wiring only**. Do not use it in permanent robot wiring.
+:::
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Type | Lever-actuated wire splice, 2-position |
+| Color coding | Yellow (CAN High), Green (CAN Low) |
+| Max current | 24A |
+| Max voltage | 450V |
+| Wire range | 24–12 AWG |
+
+### Installation
+
+No pre-installation on the wire is required — the lever mechanism is the connection.
+
+#### Connecting Wires
+
+1. Lift each lever to the open position.
+2. Strip approximately 11 mm of insulation from each wire.
+3. Insert the CAN High wire into the yellow slot and the CAN Low wire into the green slot, pushing each until it bottoms out.
+4. Push both levers down to the closed position.
+5. Tug each wire gently to confirm it is held.
+
+### Common Uses
+
+- Temporary CAN bus connections or field repairs
+- **Not for permanent use** — replace with a soldered or properly crimped connection after the event
+
+---
+
+## Wire-to-Wire Solder Splice
+
+A wire-to-wire solder splice is a permanent inline connection between two wire ends. When done correctly it is lower resistance than most crimp connectors and fully reliable under vibration.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Type | Permanent soldered splice |
+| Wire range | Any gauge that can be mechanically joined and soldered |
+| Recommended solder | Rosin-core 60/40 or 63/37 tin-lead, or SAC305 lead-free |
+
+### Installation
+
+#### Splicing Two Wires
+
+1. Slide a piece of heat-shrink tubing over one wire **before** joining — it cannot be added after.
+2. Strip approximately 20 mm of insulation from both wire ends.
+3. Interleave or hook the two stripped ends together so the mechanical joint bears any tension (not the solder joint).
+4. Apply the soldering iron to the joint and feed solder in until the joint is fully wetted and smooth.
+5. Do not move the joint until the solder has fully solidified.
+6. Inspect: the joint should be shiny and show full conductor wetting. A dull or grainy surface indicates a cold joint — reheat.
+7. Slide the heat-shrink over the joint and shrink with a heat gun.
+
+#### Disconnecting
+
+A solder splice is a permanent, non-separable connection. To separate, cut and re-splice.
+
+### Common Uses
+
+- Extending motor phase or encoder wires
+- Permanent mid-cable joints where a connector would add unnecessary bulk
+- Repairing a cut or damaged wire
+
+---
+
+## Wire-to-Board Solder Splice
+
+A wire-to-board solder splice is a permanent connection between a wire and a through-hole or surface-mount pad on a PCB.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Type | Permanent soldered connection |
+| Wire range | Match to the pad and trace current capacity |
+| Recommended solder | Rosin-core 60/40 or 63/37 tin-lead, or SAC305 lead-free |
+
+### Installation
+
+#### Soldering a Wire to a Board
+
+1. Strip approximately 5–8 mm of insulation for a through-hole pad, or 2–3 mm for a surface-mount pad.
+2. Tin the wire end: apply heat and solder to the conductor until it is fully coated.
+3. Clean the PCB pad with isopropyl alcohol if there is any contamination or oxidation.
+4. **Through-hole pad:** Insert the tinned wire through the hole and bend it slightly to hold position. Apply the iron and add solder until the joint forms a volcano shape filling the hole and wetting both the wire and pad ring.
+5. **Surface-mount pad:** Hold the tinned wire flat against the pad. Apply the iron and add a small amount of additional solder to flow onto both the wire and pad.
+6. Inspect: the joint should be shiny, fully wetted, and smooth with no bridges to adjacent pads.
+7. Apply strain relief — a dab of hot glue, a cable tie to a nearby standoff, or a purpose-built clamp — so that wire tension is not carried through the solder joint.
+
+#### Disconnecting
+
+A solder splice is a permanent, non-separable connection.
+
+### Common Uses
+
+- Soldering signal connectors directly to a custom PCB
+- CAN or PWM signal wires soldered to pads on boards that lack connectors
+- Power wires directly to a PCB when a connector is not available
+
+---
+
+## USB-A Plug
+
+USB Type-A is the rectangular plug found on the host end of most USB cables.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Standard | USB 2.0 / USB 3.x |
+| Type | Type-A plug |
+| Pin count | 4 (USB 2.0) or 9 (USB 3.x) |
+| Max voltage | 5V |
+| Max current | 0.5A–0.9A (without dedicated charging) |
+
+### Connecting to the Mating Connector
+
+1. Orient the plug — USB-A is keyed and only inserts in one orientation. The smooth face (or logo side) faces up toward the internal contacts of the receptacle.
+2. Push firmly into the USB-A receptacle until fully seated.
+
+:::warning Secure all USB-A connections
+USB-A connectors have no locking mechanism. They will vibrate loose on a robot. All USB-A connections must either use a **screw-lock USB adapter** or be **secured with hot glue** after seating.
+:::
+
+### Common Uses
+
+- Cameras, radios, and USB peripherals connected to the robot controller or compute device
+- USB hubs on the robot
+
+---
+
+## USB-C Plug
+
+USB Type-C is the small oval, reversible connector found on modern devices and cables.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Standard | USB 2.0 / USB 3.x / USB4 (depends on cable) |
+| Type | Type-C plug |
+| Pin count | 24 |
+| Max voltage | 5V (standard) to 20V (USB Power Delivery) |
+| Max current | 0.9A to 5A (depends on cable and device) |
+
+### Connecting to the Mating Connector
+
+1. Orient the plug — USB-C is reversible and inserts either way.
+2. Push firmly into the USB-C receptacle until fully seated.
+
+:::warning Secure all USB-C connections
+USB-C connectors have no locking mechanism in most applications and will vibrate loose on a robot. All USB-C connections must either use a **screw-lock USB-C adapter** or be **secured with hot glue** after seating.
+:::
+
+### Common Uses
+
+- Motor controller configuration ports (SPARK MAX, Thrifty Nova)
+- Compute device power input
+- Camera connections
