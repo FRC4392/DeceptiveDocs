@@ -5,7 +5,23 @@
   width: 100%;
 }
 
-.featureSvg {
-  height: 200px;
-  width: 200px;
+.featuresRow {
+  row-gap: 2rem;
+}
+
+.featureCard {
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  height: 100%;
+  transition: box-shadow 0.2s ease;
+}
+
+.featureCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.browseLink {
+  font-weight: 600;
+  font-size: 0.9rem;
 }
