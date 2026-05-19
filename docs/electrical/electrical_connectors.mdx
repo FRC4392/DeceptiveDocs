@@ -20,6 +20,11 @@ This page is a reference for all electrical connectors used on our robots. It co
 | [Weidmuller LSF](#weidmuller-lsf) | Push-in spring-cage, wire-to-board | varies | varies | varies |
 | [RJ45 Ethernet](#rj45-ethernet) | Network plug | — | — | 22–26 AWG |
 | [Wago 221](#wago-221) | Lever splice | 32A | 450V | 12–24 AWG |
+| [Wago 2616](#wago-2616) | PCB terminal block, lever-actuated, high-power | 76A | 1000V | 18–4 AWG |
+| [Wago 2606](#wago-2606) | PCB terminal block, lever-actuated | 41A | 1000V | 24–8 AWG |
+| [Wago 2601](#wago-2601) | PCB terminal block, lever-actuated, compact | 17.5A | 320V | 26–14 AWG |
+| [Wago 250](#wago-250) | PCB terminal strip, push-in | 8A | 320V | 22–16 AWG |
+| [Wago 745](#wago-745) | PCB terminal block, screwdriver CAGE CLAMP | 41A | 1000V | 24–10 AWG |
 | [CAN Lever Connector](#can-lever-connector) | 2-pos lever splice, CAN-coded | 24A | 450V | 12–24 AWG |
 | [USB-A Plug](#usb-a-plug) | USB Type-A | — | 5V | — |
 | [USB-C Plug](#usb-c-plug) | USB Type-C | — | 20V | — |
@@ -418,7 +423,7 @@ Insert the ferrule end into the target terminal and secure it per that terminal'
 
 ## Weidmuller LSF
 
-> **Manufacturer docs:** [Weidmuller — LSF Series](https://www.weidmuller.com/en/products/connectors/pcb_terminal_blocks/lsf.html)
+> **Manufacturer docs:** [Weidmuller — LSF Series](https://eshop.weidmueller.com/en/lsf-smt-3-5002180-3-5sn-bk-tu/p/1825640000)
 
 Weidmuller LSF connectors are push-in spring-cage terminal blocks that mount on a PCB. The connector accepts a ferrule-terminated wire and holds it via an internal spring — no screw or tool required for insertion.
 
@@ -549,6 +554,197 @@ No pre-installation on the wire is required — the lever mechanism is the conne
 - Temporary repairs during competitions
 - Quick test connections during troubleshooting
 - **Not for permanent use**
+
+---
+
+## Wago 2616
+
+> **Manufacturer docs:** [Wago — 2616 Series](https://www.wago.com/us/pcb-interconnect/pcb-terminal-block/p/2616-1101)
+
+Wago 2616 connectors are high-power lever-actuated PCB terminal blocks using WAGO's CAGE CLAMP technology. A lever opens the contact, the wire inserts, and the lever closes to clamp.
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Wago |
+| Series / Standard | 2616 |
+| Conductors | 1 per pole — various pole counts |
+| Max current per contact | 76A |
+| Max voltage | 1000V |
+| Wire range | 18–4 AWG |
+| Mating cycles | — |
+
+### Installation
+
+No pre-installation on the wire is required — the lever mechanism is the connection.
+
+#### Connecting Wires
+
+1. Lift the orange lever on the target slot to the open position.
+2. Strip approximately 11 mm of insulation from the wire end.
+3. Insert the stripped wire into the open slot until it bottoms out.
+4. Push the lever back down to clamp the wire.
+5. Tug gently to confirm the wire is held.
+
+### Common Uses
+
+- PDH battery input
+
+---
+
+## Wago 2606
+
+> **Manufacturer docs:** [Wago — 2606 Series](https://www.wago.com/us/pcb-interconnect/pcb-terminal-block/p/2606-1101)
+
+Wago 2606 connectors are medium-power lever-actuated PCB terminal blocks using WAGO's CAGE CLAMP technology. A lever opens the contact, the wire inserts, and the lever closes to clamp.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Wago |
+| Series / Standard | 2606 |
+| Conductors | 1 per pole — various pole counts |
+| Max current per contact | 41A |
+| Max voltage | 1000V |
+| Wire range | 24–8 AWG |
+| Mating cycles | — |
+
+### Installation
+
+No pre-installation on the wire is required — the lever mechanism is the connection.
+
+#### Connecting Wires
+
+1. Lift the orange lever on the target slot to the open position.
+2. Strip approximately 11 mm of insulation from the wire end.
+3. Insert the stripped wire into the open slot until it bottoms out.
+4. Push the lever back down to clamp the wire.
+5. Tug gently to confirm the wire is held.
+
+### Common Uses
+
+- PDH power distribution
+
+---
+
+## Wago 2601
+
+> **Manufacturer docs:** [Wago — 2601 Series](https://www.wago.com/us/pcb-interconnect/pcb-terminal-block/p/2601-1101)
+
+Wago 2601 connectors are compact lever-actuated PCB terminal blocks using WAGO's CAGE CLAMP technology. A lever opens the contact, the wire inserts, and the lever closes to clamp.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Wago |
+| Series / Standard | 2601 |
+| Conductors | 1 per pole — various pole counts |
+| Max current per contact | 17.5A |
+| Max voltage | 320V |
+| Wire range | 26–14 AWG |
+| Mating cycles | — |
+
+### Installation
+
+No pre-installation on the wire is required — the lever mechanism is the connection.
+
+#### Connecting Wires
+
+1. Lift the orange lever on the target slot to the open position.
+2. Strip approximately 8 mm of insulation from the wire end.
+3. Insert the stripped wire into the open slot until it bottoms out.
+4. Push the lever back down to clamp the wire.
+5. Tug gently to confirm the wire is held.
+
+### Common Uses
+
+- Mini-PDH circuits
+- PDH CAN connections
+
+---
+
+## Wago 250
+
+> **Manufacturer docs:** [Wago — 250 Series](https://www.wago.com/us/pcb-interconnect/1-conductor-pcb-terminal-strip/p/250-202)
+
+Wago 250 connectors are compact push-in PCB terminal strips using WAGO's CAGE CLAMP technology. Solid or ferrule-terminated wires insert directly without a tool; stranded wires require pressing the release button with a small screwdriver to open the spring before insertion.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Wago |
+| Series / Standard | 250 |
+| Conductors | 1 per pole — various pole counts |
+| Max current per contact | 8A |
+| Max voltage | 320V |
+| Wire range | 22–16 AWG |
+| Mating cycles | 200 (unloaded) / 100 (loaded) |
+
+### Installation
+
+#### Connecting Wires (Solid wire or ferrule-terminated)
+
+1. Strip approximately 8 mm of insulation from the wire end. Terminate with a ferrule if using stranded wire.
+2. Push the wire straight into the slot — the CAGE CLAMP grips it automatically.
+3. Tug gently to confirm the wire is held.
+
+#### Connecting Wires (Bare stranded wire)
+
+1. Strip approximately 8 mm of insulation.
+2. Insert a small flat-blade screwdriver into the release slot next to the wire entry and press to open the spring.
+3. Insert the wire into the open slot while holding the screwdriver in place.
+4. Remove the screwdriver — the spring clamps the wire.
+5. Tug gently to confirm the wire is held.
+
+#### Disconnecting
+
+Insert a small flat-blade screwdriver into the release slot and press to open the spring, then pull the wire out.
+
+### Common Uses
+
+- Mini-PDH circuits
+- PDH CAN connections
+
+---
+
+## Wago 745
+
+> **Manufacturer docs:** [Wago — 745 Series](https://www.wago.com/global/pcb-terminal-blocks-and-pluggable-connectors/modular-pcb-terminal-block/p/745-831)
+
+Wago 745 connectors are PCB terminal blocks using WAGO's CAGE CLAMP technology with screwdriver actuation. A screwdriver inserted into the release slot opens the spring clamp, the wire inserts, and withdrawing the screwdriver allows the spring to clamp down.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Wago |
+| Series / Standard | 745 |
+| Conductors | 1 per pole — various pole counts |
+| Max current per contact | 41A |
+| Max voltage | 1000V |
+| Wire range | 24–10 AWG |
+| Mating cycles | ~200 |
+
+### Installation
+
+#### Connecting Wires
+
+1. Insert a small flat-blade screwdriver into the release slot on the target pole and press to open the CAGE CLAMP.
+2. Strip approximately 8–10 mm of insulation from the wire end.
+3. Insert the stripped wire into the open wire entry while holding the screwdriver in place.
+4. Remove the screwdriver — the spring clamps the wire automatically.
+5. Tug gently to confirm the wire is held.
+
+#### Disconnecting
+
+Insert the screwdriver into the release slot to open the clamp and pull the wire straight out.
+
+### Common Uses
+
+- PDP power distribution
 
 ---
 
