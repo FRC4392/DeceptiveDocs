@@ -1,0 +1,195 @@
+---
+title: Power Distribution
+sidebar_position: 5
+---
+
+# Power Distribution
+
+Power distribution devices receive power from the robot battery and distribute it to motors, controllers, and other devices throughout the robot. Each output is individually fused, providing overcurrent protection for downstream devices.
+
+## Power Distribution Devices
+
+| Device | Manufacturer | Type | Channels | Communication |
+|---|---|---|---|---|
+| [REV Power Distribution Hub (PDH)](#rev-power-distribution-hub-pdh) | REV Robotics | Primary distribution hub | 20 high-current + 3 low-current + 1 low-current switched | CAN FD |
+| [REV Mini Power Module](#rev-mini-power-module) | REV Robotics | Secondary distribution board | 6 low-current | None |
+| [CTRE Power Distribution Panel (PDP)](#ctre-power-distribution-panel-pdp) | CTR Electronics | Primary distribution hub (legacy) | 8 high-current, 8 medium-current, 2 low-current | CAN |
+| [CTRE Power Distribution Panel 2.0 (PDP 2.0)](#ctre-power-distribution-panel-20-pdp-20) | CTR Electronics | Primary distribution hub | 24 high-current | None |
+| [Kraken X44 Flipped PowerPole Adapter Board](#kraken-x44-flipped-powerpole-adapter-board) | CTR Electronics | Power tap | 1 low-current | CAN passthrough |
+| [Kraken X60 Flipped PowerPole Adapter Board](#kraken-x60-flipped-powerpole-adapter-board) | CTR Electronics | Power tap | 1 low-current | CAN passthrough |
+| [ReFire Solutions Inline Power Tap](#refire-solutions-inline-power-tap) | ReFire Solutions | Power tap | 1 low-current | None |
+
+---
+
+## REV Power Distribution Hub (PDH)
+
+> **Product page:** [REV Robotics — Power Distribution Hub (REV-11-1850)](https://www.revrobotics.com/rev-11-1850/)
+
+The REV Power Distribution Hub (PDH) is a primary battery power distribution hub for FRC robots. It receives battery power and distributes it across 20 high-current channels, each protected by an auto-resetting breaker, and four low-current channels designed for smaller devices, each protected by a fuse. One of the low-current channels is switchable. The PDH communicates over CAN FD, enabling user code to monitor per-channel current draw, total current, input voltage, and board temperature. An onboard display provides a live readout of the battery input voltage. A dedicated switch enables an internal 120-Ω resistor to terminate the CAN bus.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | REV Robotics |
+| Type | Primary distribution hub |
+| High current channels | 20 |
+| Medium current channels | 0 |
+| Low current channels | 4, 1 is switchable |
+| High current protection | ATO style breaker |
+| Medium current protection | None |
+| Low current protection | ATM style fuses |
+| Communication | CAN FD |
+
+### Common Uses
+
+- Main robot battery power distribution
+
+---
+
+## REV Mini Power Module
+
+> **Product page:** [REV Robotics — Mini Power Module (REV-11-1856)](https://www.revrobotics.com/rev-11-1856/)
+
+The Mini Power Module is a compact secondary distribution board that taps a PDH output channel and distributes that power to several smaller devices. It is designed to reduce the number of high-current PDH channels consumed by low-power subsystems such as sensors, coprocessors, and logic boards. 
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | REV Robotics |
+| Type | Secondary distribution hub |
+| High current channels | 0 |
+| Medium current channels | 0 |
+| Low current channels | 6 |
+| High current protection | None |
+| Medium current protection | None |
+| Low current protection | ATM style fuses |
+| Communication | None |
+
+### Common Uses
+
+- Distributing power to sensors, coprocessors, and other low-power devices
+
+---
+
+## CTRE Power Distribution Panel (PDP)
+
+> **Product page:** [CTR Electronics — Power Distribution Panel](https://store.ctr-electronics.com/power-distribution-panel/)
+
+The CTRE PDP is a legacy FRC primary power distribution device. It distributes battery power through 16 fused channels and communicates over standard CAN bus, allowing user code to monitor per-channel current, total current, voltage, and temperature. The PDP is still legal for FRC competition but is considered legacy hardware; new builds should prefer a new primary power distribution device.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | CTR Electronics |
+| Type | Primary distribution hub |
+| High current channels | 8 |
+| Medium current channels | 8 |
+| Low current channels | 2 |
+| High current protection | 40 amp Snap-Action breaker |
+| Medium current protection | ATO style breaker |
+| Low current protection | ATM style fuses |
+| Communication | CAN |
+
+### Common Uses
+
+- Main robot battery power distribution (legacy builds)
+- Prototyping
+
+---
+
+## CTRE Power Distribution Panel 2.0 (PDP 2.0)
+
+The CTRE Power Distribution Panel 2.0 (PDP 2.0) is a primary battery power distribution hub for FRC robots. It receives battery power and distributes it across 24 high-current channels, each protected by an auto-resetting breaker.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | CTR Electronics |
+| Type | Primary distribution hub |
+| High current channels | 24 |
+| Medium current channels | 0 |
+| Low current channels | 0 |
+| High current protection | ATO style breaker |
+| Medium current protection | None |
+| Low current protection | None |
+| Communication | None |
+
+### Common Uses
+
+- Main robot battery power distribution
+
+---
+
+## Kraken X44 Flipped PowerPole Adapter Board
+
+The Kraken X44 Flipped PowerPole Adapter Board is an adapter developed by WCP and Vivid Hosting for the Kraken X44 motor. It connects directly to the power and CAN connections of the Kraken X44, converting the cable lug connections for power and CAN to PowerPole and Molex SL connectors respectively. An additional port allows a CANcoder to tap power and CAN directly from the board.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | WCP and Vivid Hosting |
+| Type | Power tap |
+| High current channels | Motor passthrough |
+| Medium current channels | 0 |
+| Low current channels | 1 |
+| High current protection | None |
+| Medium current protection | None |
+| Low current protection | PTC fuse |
+| Communication | CAN passthrough |
+
+### Common Uses
+
+- Mounting Kraken X44 motors in reversed or space-constrained orientations
+
+---
+
+## Kraken X60 Flipped PowerPole Adapter Board
+
+The Kraken X60 Flipped PowerPole Adapter Board is an adapter developed by WCP and Vivid Hosting for the Kraken X60 motor. It connects directly to the power and CAN connections of the Kraken X60, converting the cable lug connections for power and CAN to PowerPole and Molex SL connectors respectively. An additional port allows a CANcoder to tap power and CAN directly from the board.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | WCP and Vivid Hosting |
+| Type | Power tap |
+| High current channels | Motor passthrough |
+| Medium current channels | 0 |
+| Low current channels | 1 |
+| High current protection | None |
+| Medium current protection | None |
+| Low current protection | PTC fuse |
+| Communication | CAN passthrough |
+
+### Common Uses
+
+- Mounting Kraken X60 motors in reversed or space-constrained orientations
+
+---
+
+## ReFire Solutions Inline Power Tap
+
+The ReFire Solutions Inline Power Tap provides a fused secondary power takeoff from a device wired to the primary power distribution hub. It installs inline without interrupting the main power path, providing an independently fused output for auxiliary devices such as coprocessors, cameras, or custom electronics. This makes it particularly useful when all PDH channels are occupied.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | ReFire Solutions |
+| Type | Power tap |
+| High current channels | 1 Passthrough |
+| Medium current channels | 0 |
+| Low current channels | 1 |
+| High current protection | None |
+| Medium current protection | None |
+| Low current protection | PTC fuse |
+| Communication | None |
+
+### Common Uses
+
+- Tapping auxiliary power for coprocessors or cameras when PDH channels are exhausted
