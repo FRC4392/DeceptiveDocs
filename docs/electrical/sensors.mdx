@@ -1,0 +1,290 @@
+---
+title: Sensors
+sidebar_position: 11
+---
+
+# Sensors
+
+Sensors give the robot information about the world around it and its own state. This page covers how each sensor connects to the robot electrically — software configuration is covered separately.
+
+This page covers eleven sensors used on our robot:
+
+| Sensor | Maker | Type |
+|---|---|---|
+| [Limelight 4](#limelight-4) | Limelight Vision | Vision |
+| [Limelight 2](#limelight-2) | Limelight Vision | Vision |
+| [NavX 3](#navx-3) | Studica/Kauai Labs | IMU |
+| [Pigeon 2.0](#pigeon-20) | CTR Electronics | IMU |
+| [CTRE CANCoder](#ctre-cancoder) | CTR Electronics | Absolute encoder |
+| [WCP Throughbore CANCoder](#wcp-throughbore-cancoder) | West Coast Products | Absolute encoder |
+| [REV Through Bore Encoder](#rev-through-bore-encoder) | REV Robotics | Absolute encoder |
+| [CTRE SRX Magnetic Encoder](#ctre-srx-magnetic-encoder) | CTR Electronics | Absolute encoder |
+| [Adafruit Beam Break Sensor](#adafruit-beam-break-sensor) | Adafruit | Diffuse Photoelectric |
+| [Taiss M18 Photoelectric Sensor](#taiss-m18-photoelectric-sensor) | Taiss | Beambreak Photoelectric|
+| [Generic Limit Switch](#generic-limit-switch) | Various | Contact switch |
+
+---
+
+## Limelight 4
+
+> **Official docs:** https://docs.limelightvision.io/docs/docs-limelight/getting-started/limelight-4
+
+The Limelight 4 is a vision camera with an onboard processor for target detection and pose estimation. It communicates with the robot over Ethernet using NetworkTables
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Limelight Vision |
+| Voltage | 5V – 26V |
+| Power connection | Weidmuller connector |
+| Data connection | Ethernet |
+| Auxillary connection | USB-C for firmware flashing |
+
+### Wiring
+
+#### Power Connection:
+
+Run a pair of wires (18-20 AWG) from your Limelight to a slot on your power distribution device. Use wire ferrules to connect to the wires to weidmuller connectors on the limelight.
+
+#### Data Connection:
+
+Run an ethernet cable from the limelight to the robot radio or network switch. Plug the ethernet cable into the limelight.
+
+#### Auxilary Connection:
+
+**USB-C port** The USB-C port is used for flashing the firmware to the limelight, no connection should be made while in operation.
+
+---
+
+## Limelight 2
+
+> **Official docs:** https://docs.limelightvision.io/docs/docs-limelight/getting-started/limelight-2
+
+The Limelight 2 is a vision camera with an onboard processor for target detection and pose estimation. It communicates with the robot over Ethernet using NetworkTables
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Limelight Vision |
+| Input voltage | 6V – 24V |
+| Power connection | Weidmuller connector |
+| Data connection | Ethernet |
+| Auxillary connection | Micro-USB for firmware flashing, USB-A for external camera |
+
+### Wiring
+
+#### Power Connection:
+
+Run a pair of wires (18-20 AWG) from your Limelight to a slot on your power distribution device. Use wire ferrules to connect to the wires to weidmuller connectors on the limelight.
+
+#### Data Connection:
+
+Run an ethernet cable from the limelight to the robot radio or network switch. Plug the ethernet cable into the limelight.
+
+#### Auxilary Connection:
+
+**Micro-USB** The Micro-USB port is used for flashing the firmware to the limelight, no connection should be made while in operation.
+
+**USB-A** The USB-A port allows for connecting an external camera or google coral device for Neural Netwrok features. Plug the USB cable of the device into the USB port. Secure the cable with hot glue.
+
+---
+
+## NavX 3
+
+> **Official docs:** https://learn.studica.com/docs/frc/navx3/intro/
+
+The NavX 3 is an IMU (inertial measurement unit) from Kauai Labs that provides 9-axis motion sensing. It can be used either over CAN or over USB.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Studica/Kauai Labs |
+| Input voltage | CAN mode 8V – 30V, USB mode 5V |
+| Power connection | Wago connector, USB |
+| Data connection | Can or USB |
+| Auxillary connection | USB |
+
+### Wiring
+
+#### Power Connection:
+
+**CAN communication** When using CAN as the communication method, run a pair of wires (18-20 AWG) from the power distribution device to the NavX. Connect them to the red/black wago connections, matching wire color.
+
+**USB communication** When using USB for the communication method, the power is supplied by the USB cable. Connect a USB cable from the robot controller to the USB-C port on the NavX. Secure the USB cable with hot glue.
+
+#### Data Connection:
+
+**CAN communication** When using CAN as the communication method, run two sets of CAN wires to the device and connect them to the green/yellow WAGO connections, matching colors as they are connected.
+
+**USB communication** When using USB for the communication method, the data is supplied over the USB cable. Connect a USB cable from the robot controller to the USB-C port on the NavX. Secure the USB cable with hot glue.
+
+#### Auxilary Connection
+
+**USB-C** The USB-C port allows for firmware upgrade and configuration when using CAN as the bus. Nothing should remain connected when using CAN.
+
+---
+
+## Pigeon 2.0
+
+> **Official docs:** https://v6.docs.ctr-electronics.com/en/stable/docs/hardware-reference/pigeon2/index.html
+
+The Pigeon 2.0 is a CAN FD IMU (inertial measurement unit) from CTR Electronics that provides 9-axis motion sensing.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | CTR Electronics |
+| Input voltage | 6V – 28V |
+| Power connection | 22 AWG leads |
+| Data connection | CAN (2x 22 AWG leads) |
+| Auxillary connection | None |
+
+### Wiring
+
+#### Power Connection:
+
+Connect the power leads (red/black) to the power distribution device. If the leads must be extended, solder 22 AWG wire to extend them.
+
+#### Data Connection:
+
+Connect each pair of CAN leads to the previous or next device on the bus by either connecting them directly to the device or soldering the wires together.
+
+#### Auxilary Connection
+
+None available
+
+---
+
+## CTRE CANCoder
+
+> **Official docs:** https://v6.docs.ctr-electronics.com/en/stable/docs/hardware-reference/cancoder/index.html
+
+The CANCoder is a magnetic absolute rotary encoder from CTR Electronics. It mounts on a shaft or axle and reports absolute angle over CAN FD independently of any motor controller. It is configured with Phoenix Tuner X.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | CTR Electronics |
+| Input voltage | 6V – 16V |
+| Power connection | Solder pads for 22 AWG wire |
+| Data connection | Solder Pads for 22 AWG wire |
+| Auxillary connection | None |
+
+### Wiring
+
+#### Power Connection:
+
+Run a pair of wires (22 AWG) from the CANCoder to a slot on your power distribution device. Solder the power wires to the correct pads as labeled on the PCB.
+
+#### Data Connection:
+
+Run 2 sets of CAN cable from the previous or next device on the bus to the CANCoder. Solder the CAN cables to the correct pads as labeled on the PCB.
+
+#### Auxilary Connection
+
+None available
+
+---
+
+## WCP Throughbore CANCoder
+
+> **Official docs:** https://docs.wcproducts.com/welcome/electronics/wcp-throughbore-by-cancoder-1-2-hex
+
+The WCP Throughbore CANCoder is a throughbore encoder powered by the technology that drives the CTRE CANCoder. It mounts on a shaft or axle and reports absolute angle over CAN FD independently of any motor controller. It is configured with Phoenix Tuner X.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | WCP / CTR Electronics |
+| Input voltage | 6V – 16V |
+| Power connection | 6 pin Molex SL connector (shared with CAN) |
+| Data connection | 6 pin Molex SL connector (shared with power) |
+| Auxillary connection | None |
+
+### Wiring
+
+#### Power Connection:
+
+Run a pair of wires (22 AWG) from the power distribution device to the WCP Throughbore CANcoder. Crimp Molex SL female (socket) pins on the wires. Insert the pins into slots 6 and 5 of a Molex SL 6 pin housing.
+
+#### Data Connection:
+
+Run a set of can wires from the previous or next devices on the bus to the WCP Throughbore CANcoder. Crimp Molex SL female (socket) pins on the wires. Insert the pins into slots 1-4 of a Molex SL 6 pin housing. Alternate CAN Low, CAN High, CAN Low, CAN High.
+
+#### Auxilary Connection
+
+None available
+
+---
+
+## REV Through Bore Encoder
+
+> **Official docs:** https://docs.revrobotics.com/rev-crossover-products/sensors/tbe
+
+The REV Through Bore Encoder is a magnetic absolute encoder that mounts inline on a shaft. It outputs quadrature (A/B/Index) and absolute PWM signals, and connects to a motor controller data port
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | WCP / CTR Electronics |
+| Input voltage | 3.3V - 5V |
+| Power connection | 6 pin JST-PH (shared with quadrature and pwm data) |
+| Data connection | 6 pin JST-PH (shared with power) |
+| Auxillary connection | None |
+
+### Wiring
+
+#### Power Connection:
+
+Run a premade 6 pin JST-PH device from the controller device to the Throughbore Encoder. If an extension is needed, use a 6 pin JST-PH joiner board and extension cable. Plug the cable into the the 6 pin JST-PH connector on the Throughbore Encoder.
+
+#### Data Connection:
+
+Run a premade 6 pin JST-PH device from the controller device to the Throughbore Encoder. If an extension is needed, use a 6 pin JST-PH joiner board and extension cable. Plug the cable into the the 6 pin JST-PH connector on the Throughbore Encoder.
+
+#### Auxilary Connection
+
+None available
+
+---
+
+## Adafruit Beam Break Sensor
+
+> **Official docs:** https://www.adafruit.com/product/2168
+
+Adafruit beam break sensors consist of a paired IR emitter and IR receiver. When an object passes between them, the receiver output pulls low. They are used to detect game pieces inside a mechanism or confirm that a game piece has passed a checkpoint.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Adafruit |
+| Input voltage | 3.3V – 5V |
+| Power connection | 22 AWG leads |
+| Data connection | 22 AWG lead |
+| Auxillary connection | None |
+
+### Wiring
+
+#### Power Connection:
+
+**Emitter** Connect the power leads (red/black) from the emitter (device with two leads) to a 5V or 3.3V power source (can be shared wit receiver). If the leads need to be extended solder them to additional wire. Ensure red is positve and black is negative.
+
+**Receiver** Connect the power leads (red/black) from the receiver to the voltage supply of the controller device's IO port. If the leads need to be extended solder them to additional wire. Ensure the robot controller uses either 3.3V or 5V signaling.
+
+#### Data Connection:
+
+**Receiver** Connect the data lead (yellow/white) from the receiver to the signal pin of the controller device's IO port. If the leads need to be extended solder them to additional wire. Ensure the robot controller uses either 3.3V or 5V signaling. If the controller doesn't doesn't have built in pull up resistors, one may need to be added.
+
+#### Auxilary Connection
+
+None available
+
+---
