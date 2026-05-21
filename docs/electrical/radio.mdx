@@ -1,0 +1,89 @@
+---
+title: Radio
+sidebar_position: 8
+---
+
+# Radio
+
+The robot radio is the wireless bridge between the robot and the Driver Station. It connects to the roboRIO over Ethernet, receives commands from the Driver Station laptop over Wi-Fi, and relays robot telemetry back. At competition, the field-provided FMS configures the radio and manages the wireless channel — teams do not control this directly.
+
+## Radio
+
+| Device | Manufacturer | Wireless |
+|---|---|---|
+| [VH-109](#vh-109) | Vivid-Hosting | Wi-Fi 2.4 GHz (802.11b/g/n) + Wi-Fi 6E (802.11ax) |
+
+---
+
+## VH-109
+
+> **Official docs:** https://frc-radio.vivid-hosting.net
+
+The VH-109 is the FRC-legal robot radio required for competition starting in 2025. It bridges the roboRIO to the Driver Station wirelessly, operating on 2.4 GHz for compatibility with FMS field access points and 6 GHz (Wi-Fi 6E) for team use and high-bandwidth applications. It accepts power either through the RIO Ethernet port via passive PoE or through a dedicated 12 V Weidmuller connector. Four Ethernet ports provide connectivity to the roboRIO, Driver Station, and two auxiliary devices. PoE output on the two AUX ports is off by default and enabled via DIP switches on the radio's underside.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Vivid-Hosting |
+| Input voltage | 4.5 V – 19 V |
+| Nominal voltage | 12 V |
+| Current draw | 0.5 A @ 12 V |
+| Wireless (2.4 GHz) | 802.11b/g/n, 2412–2462 MHz (FCC) |
+| Wireless (5 GHz) | None |
+| Wireless (6 GHz) | 802.11ax (Wi-Fi 6E), 5945–7125 MHz (FCC) |
+| Ethernet ports | 4 |
+| RIO port speed | 10/100 Mbps |
+| DS port speed | 10/100/1000 Mbps (Gigabit) |
+| AUX port speed | 10/100 Mbps |
+| PoE input | Passive PoE on RIO port (4.5–19 V) |
+| PoE output | Passive PoE on AUX1 and AUX2 (DIP switch controlled, off by default) |
+| Power connector | Weidmuller terminal |
+| mDNS address | `radio.local` (firmware v1.1.0+) |
+| Fallback IP | 192.168.69.1 |
+
+### Ports
+
+| Port | Speed | PoE | Description |
+|---|---|---|---|
+| RIO | 10/100 Mbps | Input (passive) | Connects to roboRIO; primary PoE power input |
+| AUX1 | 10/100 Mbps | Output (DIP switch 1) | Auxiliary device (e.g., coprocessor, camera) |
+| AUX2 | 10/100 Mbps | Output (DIP switch 2) | Auxiliary device |
+| DS | 10/100/1000 Mbps | None | Driver Station laptop (tethered use) |
+
+### LED Status Indicators
+
+| LED | Meaning |
+|---|---|
+| PWR | Off = no power; solid = powered on |
+| SYS (slow blink ~1 Hz) | Booted, but cannot reach field-side IP (10.xx.yy.4) |
+| SYS (fast blink ~20 Hz) | Firmware update in progress |
+| SYS (solid) | Healthy; field-side IP reachable |
+| 2.4G | 2.4 GHz radio activity |
+| 6G | 6 GHz radio activity |
+| RIO | RoboRIO Ethernet link status |
+
+### Wiring
+
+#### Power:
+
+Run a set of wires from the power distribution device to the radio. Install wire ferulles on each wire and connect them to the Weidmuller connector. Ensure red goes to + and black goes to -.
+
+#### RoboRIO Connection:
+
+Run an Ethernet cable from the **RIO port** on the radio to the Ethernet port on the roboRIO.
+
+#### Auxiliary Devices:
+
+Connect coprocessors, cameras, or switches to **AUX1** or **AUX2**. If passive POE is used, enable it with the DIP switches on the bottom of the device.
+
+:::warning Passive POE damage
+Passive POE does not have an active standard and the input voltage is always sent down the ethernet cable. This can damage devices that are not configured for passive POE. It is reccomended to not use passive POE to prevent accidently damaging devices.
+
+### Mounting
+
+Use zip ties around the zip tie slots to mount the radio. Mount the radio on the robot's metal chassis to use it as a heat sink. Keep the status LEDs visible so field staff can check radio state without moving the robot. Do not fully enclose the radio in plastic or 3D-printed housings — this traps heat. Keep the antennas clear of metal structures and motors to avoid RF degradation; FIRST recommends at least 12 inches of clearance around the antennas.
+
+### Common Uses
+
+- Main Robot-Radio
