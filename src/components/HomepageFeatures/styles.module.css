@@ -12,13 +12,17 @@
 .featureCard {
   padding: 1.5rem 1rem;
   border: 1px solid var(--ifm-color-emphasis-200);
+  /* Signature card: Deceiver-blue accent bar on top */
+  border-top: 4px solid var(--ifm-color-primary);
   border-radius: var(--ifm-global-radius);
+  background: var(--ifm-background-surface-color);
   height: 100%;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .featureCard:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 48, 95, 0.12);
+  transform: translateY(-2px);
 }
 
 .browseLink {

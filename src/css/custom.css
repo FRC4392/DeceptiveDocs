@@ -1,30 +1,207 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Deceivers Robotics — Brand & Design System v1.0
+ * Anchored on Deceiver Blue (#004392): one blue, disciplined neutrals.
+ * The design system's tokens are mapped onto Infima below — style with the
+ * Infima / --dz-* variables, never with raw hex.
  */
 
-/* You can override the default Infima variables here. */
+/* ============================================================
+   1. Brand palette (raw tokens — the single source of truth)
+   ============================================================ */
 :root {
-  --ifm-color-primary: #004392;
-  --ifm-color-primary-dark: #003d83;
-  --ifm-color-primary-darker: #003a7c;
-  --ifm-color-primary-darkest: #003066;
-  --ifm-color-primary-light: #0049a1;
-  --ifm-color-primary-lighter: #004ca8;
-  --ifm-color-primary-lightest: #0055be;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Blue scale */
+  --dz-tint: #d5e3f4;
+  --dz-light: #6e9dd8;
+  --dz-bright: #1256a8;
+  --dz-core: #004392; /* Deceiver Blue — the one constant */
+  --dz-deep: #00305f;
+  --dz-navy: #001730;
+
+  /* Cool-tinted neutrals */
+  --dz-white: #ffffff;
+  --dz-paper: #f7f9fb;
+  --dz-line: #dfe5ea;
+  --dz-muted: #97a4b0;
+  --dz-slate: #4e5d6c;
+  --dz-ink: #0e1622;
+
+  /* Dark-mode roles */
+  --dz-surface-dark: #04264c;
+  --dz-line-dark: #143a63;
+  --dz-text-dark: #eaf1f9;
+  --dz-muted-dark: #9db4ce;
+  --dz-primary-dark: #2e6dbe;
+  --dz-accent-dark: #8fb6e4;
+
+  /* Semantic — status only, used sparingly */
+  --dz-success: #1e8e5a;
+  --dz-warning: #e0a106;
+  --dz-danger: #c8452f;
+  --dz-info: #1256a8;
+
+  /* Type families — athletic display, honest body, mono for data */
+  --dz-font-display: "Saira Condensed", "Hanken Grotesk", system-ui, sans-serif;
+  --dz-font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --dz-font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #4da6ff;
-  --ifm-color-primary-dark: #3d9eff;
-  --ifm-color-primary-darker: #3499ff;
-  --ifm-color-primary-darkest: #1a8aff;
-  --ifm-color-primary-light: #5fb0ff;
-  --ifm-color-primary-lighter: #66b3ff;
-  --ifm-color-primary-lightest: #80c0ff;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+/* ============================================================
+   2. Light mode (default) — Background: Paper, Surface: White
+   ============================================================ */
+:root {
+  /* Primary — Deceiver Blue */
+  --ifm-color-primary: #004392;
+  --ifm-color-primary-dark: #003c83;
+  --ifm-color-primary-darker: #00397c;
+  --ifm-color-primary-darkest: #002f66;
+  --ifm-color-primary-light: #004aa1;
+  --ifm-color-primary-lighter: #004da8;
+  --ifm-color-primary-lightest: #0057be;
+
+  /* Surfaces & text */
+  --ifm-background-color: var(--dz-paper);
+  --ifm-background-surface-color: var(--dz-white);
+  --ifm-font-color-base: var(--dz-ink);
+  --ifm-heading-color: var(--dz-ink);
+  --ifm-color-content-secondary: var(--dz-slate);
+
+  /* Borders / lines */
+  --ifm-color-emphasis-200: var(--dz-line);
+  --ifm-toc-border-color: var(--dz-line);
+  --ifm-hr-border-color: var(--dz-line);
+  --ifm-table-border-color: var(--dz-line);
+
+  /* Links / accent (Link role = Bright #1256A8) */
+  --ifm-link-color: var(--dz-bright);
+  --ifm-link-hover-color: var(--dz-core);
+  --ifm-menu-color-active: var(--dz-core);
+
+  /* Semantic mapping */
+  --ifm-color-success: var(--dz-success);
+  --ifm-color-warning: var(--dz-warning);
+  --ifm-color-danger: var(--dz-danger);
+  --ifm-color-info: var(--dz-info);
+
+  /* Typography */
+  --ifm-font-family-base: var(--dz-font-body);
+  --ifm-font-family-monospace: var(--dz-font-mono);
+  --ifm-heading-font-family: var(--dz-font-body);
+  --ifm-heading-font-weight: 700;
+
+  /* Shape — components kit uses ~10px radii */
+  --ifm-global-radius: 0.6rem;
+
+  --ifm-code-font-size: 90%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 67, 146, 0.08);
+
+  /* Chrome */
+  --ifm-navbar-background-color: var(--dz-white);
+  --ifm-footer-background-color: var(--dz-navy);
+}
+
+/* ============================================================
+   3. Dark mode — Two modes, same blue
+   ============================================================ */
+[data-theme="dark"] {
+  /* Primary shifts to a legible mid-blue on dark */
+  --ifm-color-primary: #2e6dbe;
+  --ifm-color-primary-dark: #2962ab;
+  --ifm-color-primary-darker: #275da2;
+  --ifm-color-primary-darkest: #204c85;
+  --ifm-color-primary-light: #3578ce;
+  --ifm-color-primary-lighter: #3f7fd0;
+  --ifm-color-primary-lightest: #5b92d7;
+
+  --ifm-background-color: var(--dz-navy);
+  --ifm-background-surface-color: var(--dz-surface-dark);
+  --ifm-font-color-base: var(--dz-text-dark);
+  --ifm-heading-color: var(--dz-text-dark);
+  --ifm-color-content-secondary: var(--dz-muted-dark);
+
+  --ifm-color-emphasis-200: var(--dz-line-dark);
+  --ifm-toc-border-color: var(--dz-line-dark);
+  --ifm-hr-border-color: var(--dz-line-dark);
+  --ifm-table-border-color: var(--dz-line-dark);
+
+  --ifm-link-color: var(--dz-accent-dark);
+  --ifm-link-hover-color: #b9d3ee;
+  --ifm-menu-color-active: var(--dz-accent-dark);
+
+  --ifm-navbar-background-color: var(--dz-surface-dark);
+  --ifm-footer-background-color: var(--dz-navy);
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.35);
+}
+
+/* ============================================================
+   4. Typography treatment
+   Display headings (page + section titles) get the athletic
+   Saira Condensed italic-caps voice; deeper headings stay in
+   the readable Hanken grotesque, per the type scale.
+   ============================================================ */
+h1,
+h2,
+.hero__title,
+.navbar__title {
+  font-family: var(--dz-font-display);
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+}
+
+h1,
+.hero__title {
+  font-weight: 800;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+/* Deeper headings — honest, readable, sentence case */
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--dz-font-body);
+  font-weight: 700;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.navbar__title {
+  font-size: 1.15rem;
+}
+
+/* Hero sits on the dark blue gradient in both modes, so its title is always
+   white — overriding Infima's global heading color (and its own
+   --ifm-hero-text-color, which is #000 here). */
+.hero--primary .hero__title {
+  color: #fff;
+}
+
+/* ============================================================
+   5. Chrome details
+   ============================================================ */
+/* Navy footer regardless of Infima's default dark-footer tokens */
+.footer--dark {
+  --ifm-footer-background-color: var(--dz-navy);
+  --ifm-footer-color: #c2cbd4;
+  --ifm-footer-link-color: #c2cbd4;
+  --ifm-footer-title-color: #ffffff;
+}
+.footer--dark .footer__link-item:hover {
+  color: #ffffff;
+}
+
+/* Deceiver-blue selection */
+::selection {
+  background: var(--dz-core);
+  color: #fff;
+}
+[data-theme="dark"] ::selection {
+  background: var(--dz-primary-dark);
+  color: #fff;
 }
