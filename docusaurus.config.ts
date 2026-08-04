@@ -125,6 +125,12 @@ const config: Config = {
           position: 'left',
           label: 'Build',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'buildsidebar',
+          position: 'left',
+          label: 'Media',
+        },
       ],
     },
     footer: {
@@ -156,6 +162,10 @@ const config: Config = {
             {
               label: 'Build',
               href: '/docs/build/'
+            },
+            {
+              label: 'Media',
+              href: '/docs/media/'
             },
           ]
         },
