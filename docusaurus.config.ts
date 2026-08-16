@@ -127,7 +127,7 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'buildsidebar',
+          sidebarId: 'mediasidebar',
           position: 'left',
           label: 'Media',
         },
