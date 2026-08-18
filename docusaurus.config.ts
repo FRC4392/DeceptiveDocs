@@ -91,15 +91,15 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'teamsidebar',
+          sidebarId: 'startheresidebar',
           position: 'left',
-          label: 'Team',
+          label: 'Start Here',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'softwaresidebar',
+          sidebarId: 'designsidebar',
           position: 'left',
-          label: 'Software',
+          label: 'Design',
         },
         {
           type: 'docSidebar',
@@ -115,15 +115,15 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'designsidebar',
+          sidebarId: 'softwaresidebar',
           position: 'left',
-          label: 'Design',
+          label: 'Software',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'buildsidebar',
+          sidebarId: 'competitionsidebar',
           position: 'left',
-          label: 'Build',
+          label: 'Competition',
         },
         {
           type: 'docSidebar',
@@ -140,12 +140,8 @@ const config: Config = {
           title: 'Categories',
           items: [
             {
-              label: ' Team Documents',
-              href: '/docs/team/'
-            },
-            {
-              label: 'Software',
-              href: '/docs/software/'
+              label: 'Design',
+              href: '/docs/design/'
             },
             {
               label: 'Manufacturing',
@@ -156,12 +152,12 @@ const config: Config = {
               href: '/docs/electrical/'
             },
             {
-              label: 'Design',
-              href: '/docs/design/'
+              label: 'Software',
+              href: '/docs/Software/'
             },
             {
-              label: 'Build',
-              href: '/docs/build/'
+              label: 'Competition',
+              href: '/docs/competition/'
             },
             {
               label: 'Media',
@@ -175,6 +171,10 @@ const config: Config = {
             {
               label: 'Youtube',
               href: 'https://www.youtube.com/@thedeceivers',
+            },
+            {
+              label: 'Instagram',
+              href: 'https://www.instagram.com/deceivers4392/',
             },
             {
               label: 'TikTok',
