@@ -1,0 +1,16 @@
+.cardTitleIcon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.6rem;
+  /* Sizes the emoji override path; the SVGs are sized in em off this. */
+  font-size: 1.6rem;
+  /* The card container remaps --ifm-link-color to a muted grey, so the glyph
+     needs its color set explicitly to land on Deceiver Blue. custom.css
+     already swaps --ifm-color-primary for dark mode. */
+  color: var(--ifm-color-primary);
+}
+
+.cardTitleIcon svg {
+  width: 1.25em;
+  height: 1.25em;
+}

@@ -14,7 +14,9 @@ export default function SectionCards() {
   const sidebar = useDocsSidebar();
   const {pathname} = useLocation();
   const items = (sidebar?.items ?? []).filter(
-    (item) => !('href' in item && normalize(item.href) === normalize(pathname)),
+    // Categories carry an optional href, hence the extra guard.
+    (item) =>
+      !('href' in item && item.href && normalize(item.href) === normalize(pathname)),
   );
   return <DocCardList items={items} />;
 }

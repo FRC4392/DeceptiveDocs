@@ -205,3 +205,28 @@ h6 {
   background: var(--dz-primary-dark);
   color: #fff;
 }
+
+/* ============================================================
+   6. Doc cards
+   The cards on section landing pages (<SectionCards />) and on
+   generated category indexes, given the same signature treatment
+   as the homepage .featureCard: blue accent bar, lift on hover.
+   Doubled selector (.card is always emitted alongside) so this
+   outranks the theme's own equal-specificity module class.
+   ============================================================ */
+.theme-doc-card-container.card {
+  border-top: 4px solid var(--ifm-color-primary);
+  background: var(--ifm-background-surface-color);
+  transition: box-shadow 0.2s ease, transform 0.2s ease,
+    border-color var(--ifm-transition-fast) ease;
+}
+
+.theme-doc-card-container.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 48, 95, 0.12);
+  transform: translateY(-2px);
+}
+
+/* The navy-tinted shadow disappears against the dark background */
+[data-theme="dark"] .theme-doc-card-container.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
