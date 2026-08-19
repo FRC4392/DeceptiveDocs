@@ -185,14 +185,28 @@ h6 {
 /* ============================================================
    5. Chrome details
    ============================================================ */
-/* Navy footer regardless of Infima's default dark-footer tokens */
+/* Footer mirrors the navbar in both modes, so the two bookend the page.
+   The `dark` footer style in docusaurus.config.ts only emits the class —
+   every color it uses is set here, overriding Infima's own defaults.
+   The hairline keeps the top edge legible in light mode, where footer and
+   page background are both near-white; it matches the sidebar/TOC rule. */
 .footer--dark {
-  --ifm-footer-background-color: var(--dz-navy);
+  --ifm-footer-background-color: var(--ifm-navbar-background-color);
+  --ifm-footer-color: var(--dz-slate);
+  --ifm-footer-link-color: var(--dz-slate);
+  --ifm-footer-title-color: var(--dz-ink);
+  border-top: 1px solid var(--ifm-toc-border-color);
+}
+.footer--dark .footer__link-item:hover {
+  color: var(--ifm-link-hover-color);
+}
+
+[data-theme="dark"] .footer--dark {
   --ifm-footer-color: #c2cbd4;
   --ifm-footer-link-color: #c2cbd4;
   --ifm-footer-title-color: #ffffff;
 }
-.footer--dark .footer__link-item:hover {
+[data-theme="dark"] .footer--dark .footer__link-item:hover {
   color: #ffffff;
 }
 
