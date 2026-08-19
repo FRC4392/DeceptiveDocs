@@ -10,42 +10,59 @@ type FeatureItem = {
   link: string;
 };
 
+// Start Here applies to every member regardless of subteam, so it leads on its
+// own row.
+const LeadFeature: FeatureItem = {
+  title: 'Start Here',
+  description:
+    'Handbook, shop safety, onboarding, the season calendar, and everything else that applies to every member.',
+  link: '/docs/start-here/',
+};
+
+// The rest follow the robot's lifecycle: design it, make it, wire it, program
+// it, compete with it, tell people about it.
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Team',
-    description: 'Handbook, drive team criteria, and member resources.',
-    link: '/docs/team/',
-  },
-  {
-    title: 'Software',
-    description: 'Programming references, tools, and control system guides.',
-    link: '/docs/software/',
+    title: 'Design',
+    description:
+      'CAD setup, document and part naming, design standards, and designing for the machines we actually own.',
+    link: '/docs/design/',
   },
   {
     title: 'Manufacturing',
-    description: 'Machining, fabrication, and build processes.',
+    description:
+      'Machine sign-off, shop layout, fasteners, and how we cut, rivet, print, and machine parts.',
     link: '/docs/manufacturing/',
   },
   {
     title: 'Electrical',
-    description: 'Wiring, motor controllers, connectors, and power distribution.',
+    description:
+      'Wiring standards, power distribution, motors, controllers, sensors, and battery care.',
     link: '/docs/electrical/',
   },
   {
-    title: 'Design',
-    description: 'CAD resources, design standards, and part libraries.',
-    link: '/docs/design/',
+    title: 'Software',
+    description:
+      'Development setup, code structure, command-based programming, deploying, autonomous, and vision.',
+    link: '/docs/software/',
   },
   {
-    title: 'Build',
-    description: 'Assembly, integration, and competition prep.',
-    link: '/docs/build/',
+    title: 'Competition',
+    description:
+      'Scouting, competition-day procedures, the pit kit, and the criteria and manual for each special role.',
+    link: '/docs/competition/',
+  },
+  {
+    title: 'Media',
+    description:
+      'Brand guide, media release and consent, social media guidelines, and photo and video workflow.',
+    link: '/docs/media/',
   },
 ];
 
-function Feature({title, description, link}: FeatureItem) {
+function Feature({title, description, link, wide}: FeatureItem & {wide?: boolean}) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col', wide ? 'col--12' : 'col--4')}>
       <div className={clsx('text--center padding-horiz--md', styles.featureCard)}>
         <Heading as="h3">
           <Link to={link}>{title}</Link>
@@ -64,6 +81,7 @@ export default function HomepageFeatures(): ReactNode {
     <section className={styles.features}>
       <div className="container">
         <div className={clsx('row', styles.featuresRow)}>
+          <Feature {...LeadFeature} wide />
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}

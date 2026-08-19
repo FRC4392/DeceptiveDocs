@@ -153,7 +153,7 @@ const config: Config = {
             },
             {
               label: 'Software',
-              href: '/docs/Software/'
+              href: '/docs/software/'
             },
             {
               label: 'Competition',

@@ -23,8 +23,8 @@ function HomepageHeader() {
           FRC Team 4392 — The Deceivers | Brimley, Michigan
         </p>
         <p className={styles.heroDescription}>
-          The official knowledge base for Team 4392 — covering team culture,
-          software, manufacturing, electrical systems, design, and build processes.
+          The official knowledge base for Team 4392 — how we design, build,
+          wire, program, compete with, and talk about our robot.
         </p>
       </div>
     </header>
