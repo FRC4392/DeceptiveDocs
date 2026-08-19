@@ -1,0 +1,90 @@
+---
+title: Robot Controllers
+sidebar_position: 7
+---
+
+# Robot Controllers
+
+:::note[Rough Draft]
+This page is a rough draft and still needs to be edited
+:::
+
+Robot controllers are the central compute platforms on an FRC robot. The primary robot controller runs the main robot program, communicates with the Driver Station, and coordinates all actuators and sensors over CAN and other buses.
+
+## Robot Controllers
+
+| Device | Manufacturer | Type | Communication |
+|---|---|---|---|
+| [NI RoboRIO 2.0](#ni-roborio-20) | National Instruments | Primary robot controller | CAN, USB, Ethernet |
+| [Limelight SystemCore](#limelight-systemcore) | Limelight Vision | Primary robot controller | CAN FD, Ethernet, USB |
+
+---
+
+## NI RoboRIO 2.0
+
+> **Official docs:** https://www.ni.com/docs/en-US/bundle/roborio-20-specs/page/specs.html
+
+The NI RoboRIO 2.0 is the primary robot controller required for FRC competition. It runs your robot program — written in Java, C++, or Python — and talks to every other device on the robot over CAN bus, PWM, Ethernet, and USB. Under the hood, it uses two chips working together: an application processor runs your code, while a dedicated FPGA handles real-time I/O so signals stay precise even when your program is busy. It connects directly to the power distribution hub for power and to the robot radio over Ethernet to communicate with the Driver Station.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | National Instruments (NI) |
+| Type | Primary robot controller |
+| Processor | Dual-core ARM Cortex-A9 667 MHz + Xilinx Zynq-7020 FPGA |
+| RAM | 256 MB DRAM |
+| Storage | 512 MB eMMC |
+| Operating voltage | 6.8 V – 16 V |
+| Communication | CAN, USB, Ethernet, SPI, I2C, UART |
+| Digital I/O | 10 bidirectional channels + 16 3.3v (5v tolerant) bidirectional channels on the MXP |
+| Analog I/O | 4 inputs (0–5 V), 4 inputs (0-5 v) on the MXP, 2 outputs (0–5 V) on the MXP |
+| PWM outputs | 10 |
+| Dimensions | 5.4 × 4.5 × 1.63 in |
+| Weight | 0.44 lbs |
+| Power connection | Screw terminal (12 V from PDH or PDP) |
+| Ethernet | 1× 10/100 Mbps RJ45 |
+| USB | 2× USB-A host, 1× USB-B device |
+| CAN | CAN 2.0 |
+
+### Common Uses
+
+- Legacy primary robot controller
+- Prototypes
+
+---
+
+## Limelight SystemCore
+
+:::caution Preliminary specifications
+The Limelight SystemCore is currently in alpha. All specifications are subject to change prior to final release.
+:::
+
+> **Official docs:** https://downloads.limelightvision.io/documents/systemcore_specifications_june15_2025_alpha.pdf
+
+The Limelight SystemCore is an FRC-legal primary robot controller built around the Raspberry Pi CM5. It runs a customized version of Linux and splits its work between two chips: the main processor handles networking, USB, and CAN bus, while a dedicated real-time chip manages the I/O ports, the built-in IMU (gyro + accelerometer), and fault detection. It connects to the rest of the robot over up to five CAN FD ports and Gigabit Ethernet, and its six Smart I/O ports can be individually configured as digital inputs, digital outputs, PWM outputs, or analog inputs. A small OLED screen on the board shows live status like IP address and any active hardware faults, so you don't need a laptop to know if something is wrong.
+
+### Specifications
+
+| Parameter | Value |
+|---|---|
+| Manufacturer | Limelight Vision |
+| Type | Primary robot controller |
+| Processor | Quad-core ARM Cortex-A76 2.4 GHz (BCM2712) + RP2350 realtime I/O subsystem |
+| RAM | 4 GB LPDDR4X-4267 |
+| Storage | 16 GB eMMC |
+| Operating voltage | 5 V – 26 V |
+| Communication | 5x CAN FD, Ethernet, 4x USB, 2x I2C, Wi-Fi 802.11ac |
+| Digital I/O | 6 (shared across Smart I/O) |
+| Analog I/O | 6 (shared across Smart I/O) |
+| PWM outputs | 6 (shared across Smart I/O) |
+| Dimensions | 5.3 × 2.8 × 1.1 in |
+| Weight | 0.475 lbs |
+| Power connection | Weidmuller terminal, 18 AWG ferruled wire |
+| Ethernet | 1× Gigabit RJ45 |
+| USB | 4× USB-A 3.0, 1× USB-C (LINK, data-only) |
+| CAN | CAN FD, 5 interfaces, up to 8 Mbps, 120 Ω termination |
+
+### Common Uses
+
+- Primary robot controller
