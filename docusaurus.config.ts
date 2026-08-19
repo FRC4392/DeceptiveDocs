@@ -68,6 +68,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: './src/css/custom.css',
