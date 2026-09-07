@@ -9,176 +9,248 @@ sidebar_position: 1
 
 **Deceivers Robotics Team 4392**
 
-DeceptiveHours is the team's hour tracking system. It has two parts: a public **Time Clock Kiosk** that any team member uses to clock in and out, and a protected **Mentor Dashboard** for managing the roster and reviewing hours.
+DeceptiveHours is the team's hour tracking system. It has two parts: a mentor-unlocked **Time Clock Kiosk** that team members use to clock in and out, and a protected **Mentor Dashboard** for managing the roster and reviewing hours.
+
+---
+
+## Table of Contents
+
+1. [Time Clock Kiosk](#1-time-clock-kiosk)
+2. [Mentor Sign-In](#2-mentor-sign-in)
+3. [Dashboard](#3-dashboard)
+4. [Team Members](#4-team-members)
+5. [Member Detail](#5-member-detail)
+6. [Managing Users](#6-managing-users)
+7. [Getting Around the Mentor Area](#7-getting-around-the-mentor-area)
+
+---
 
 ## 1. Time Clock Kiosk
 
-The kiosk is the home screen (`/`) and is always public — no login required. It is designed to run on a shared screen such as a Raspberry Pi display at the build space entrance.
+A mentor must sign in on the kiosk browser first, then the shared screen can stay open for team members to clock in and out.
 
 ### Clocking In or Out
 
-1. Enter your **Member ID** in the text field and press **Enter** or click the arrow button.
-   - Your Member ID is the 10-digit number starting with `4392` assigned when you were added to the roster.
+1. Scan your **ID Badge**
+   - Alternatively you can enter your **Member ID** in the text field. Your Member ID is the 10-digit number starting with `4392` assigned when you were added to the roster.
 2. Your name and current status will appear on screen.
-3. If you are clocked out, press **Clock In**.  
+3. If you are clocked out, press **Clock In**.
    If you are already clocked in, press **Clock Out**.
-4. A confirmation screen will appear briefly, then the kiosk resets automatically for the next person.
-
-### Using a QR Code
-
-If your mentor has given you a printed QR code:
-
-1. Click the **QR Code** icon button next to the input field.
-2. Allow camera access when prompted.
-3. Hold your QR code up to the camera — it will scan automatically.
-4. Your member card will appear as if you had typed your ID manually.
+4. A confirmation screen appears with a 5-second countdown, then the kiosk resets automatically for the next person. Press **Start Over Now** to skip the countdown.
 
 ### What the Kiosk Shows
 
 Once your ID is found, the member card displays:
 
-- Your name and member type (Student or Mentor)
-- Your total hours for the current year
-- How long your current session has been running (if clocked in)
+- Your initials, name, and member type (Student or Mentor)
+- **Range Hours** — your hours for the configured reporting range. While you are clocked in, this figure includes your current session and keeps counting up.
+- **Session** — how long your current session has been running, or **Status: Not in** when you are clocked out
 - A Clock In or Clock Out button
-
-If your Member ID is not found, an error message will appear and the kiosk will return to the entry screen.
 
 ---
 
 ## 2. Mentor Sign-In
 
-Mentors access the protected dashboard at `/login`.
+Mentors sign in on the protected sign-in screen.
 
-1. Enter your **email address** and **password**.
-2. Click **Sign In**.
-3. You will be redirected to the Dashboard.
+1. Enter your email and password in the sign-in form on the page.
+2. Complete any extra verification prompts if required.
+3. You'll be taken to the Dashboard automatically once sign-in succeeds.
 
-> If you have forgotten your password, contact another mentor who can create a new account for you, or reach out to whoever manages the system.
-
-There is no public sign-up — accounts are created by existing mentors only (see [Section 6](#6-adding-mentor-accounts)).
+If you sign in with a **student** account, you'll see a "Mentor access required" screen with a **Sign out** button. Only mentor accounts can open the dashboard or unlock the kiosk.
 
 ---
 
 ## 3. Dashboard
 
-The Dashboard (`/dashboard`) gives a live overview of team activity.
+The Dashboard gives a live overview of team activity.
+
+### Hours Range
+
+The **Hours Range** card at the top controls which completed sessions are counted.
+
+- **Apply** temporarily changes the dashboard report without changing the team default.
+- **Save Default** stores the range used by the dashboard, kiosk, and member detail pages.
+- **Reset** returns the controls to the saved default range.
+- **Export** downloads the currently displayed hours table as a CSV (name, email, role, grade, Member ID, hours).
+
+The card also spells out the active range in words, for example "Showing Jan 1, 2026 to now". If no default range has been saved yet, the app uses January 1st of the current year through now.
 
 ### Summary Cards
 
-At the top of the page, three cards show:
+Three cards summarize the current range. Each one breaks its number down into **Mentors** and **Students**:
 
-- **Currently Clocked In** — the number of members presently in a session
-- **Total Hours YTD** — all completed team hours since January 1st of the current year
-- **Total Members** — the total number of people on the roster
+- **Currently Clocked In** — how many members are presently in a session, out of the total roster
+- **Total Team Hours** — completed team hours in the selected range
+- **Team Members** — how many people are on the roster
 
 ### Currently Clocked In
 
-A live grid shows every member who is currently clocked in, with a running timer showing how long they have been in the building.
+When at least one person is clocked in, a live grid shows each of them with a running timer. Click a card to jump to that member's detail page.
 
-### All Members
+### All Team Members
 
-A table lists every team member sorted by total hours (highest first). Each row shows:
+A table lists every team member sorted by hours (highest first), then by name. Columns are:
 
-- Name
-- Member type badge (Student / Mentor)
-- Total hours year-to-date
-- A link to their Member Detail page
+- Name (click it to open the member's detail page)
+- Type badge (Student / Mentor)
+- Grade, when available
+- Member ID
+- Hours in the selected range
 
 ---
 
 ## 4. Team Members
 
-The Team Members page (`/members`) is where you manage the roster.
+The **Team Members** page is where you view the roster.
 
 ### Viewing Members
 
-The page shows a table of all members with their name, type, and Member ID.
+The table shows each member's name, type, grade, and Member ID, with a **›** button on the right that opens their detail page. The roster is sorted by last name, first name, and Member ID by default.
 
-### Adding a Member
+Use the controls above the table to:
 
-1. Click **Add Member** in the top-right corner.
-2. Fill in:
-   - **First Name** and **Last Name**
-   - **Member Type** — Student or Mentor
-3. Click **Add Member**.
+- Search by name, email, or Member ID
+- Filter by role (all / students / mentors)
+- Filter by grade (6–12 or Alumni)
+- Sort by clicking the **Name**, **Type**, **Grade**, or **Member ID** column headers — click the same header again to reverse the direction
+- **Export** the currently visible roster rows as a CSV
 
-A Member ID is generated automatically (a 10-digit number beginning with `4392`). The member can find their assigned ID on their detail page, where a QR code can also be generated for printing.
+### Student Info
 
-### Removing a Member
+Students can have two optional fields, edited on the member's detail page:
 
-1. Click the **trash icon** next to the member's name.
-2. A confirmation dialog will warn you that all of the member's clock-in sessions will also be permanently deleted.
-3. Click **Remove** to confirm.
+- **Student Start Year** — the year they started with the team.
+- **Current Grade** — grades 6 through 12, or Alumni.
 
-> This action cannot be undone.
+Grades advance automatically on July 1 each year. A student listed as grade 12 becomes Alumni after the next July 1 rollover.
 
 ---
 
 ## 5. Member Detail
 
-Click any member's name or the **view icon** to open their detail page (`/members/:id`).
+Click a member's name on the Dashboard, or the **›** button on the Team Members page, to open their detail page (`/members/:id`). The **←** button in the header returns to the roster.
 
 ### Member Info
 
-The card at the top shows the member's name, ID, and type. Click **Edit** to update any of these fields.
+The card at the top shows the member's first name, last name, Member ID, and type, plus student start year and grade for students. Click **Edit** to change any of these in a dialog — including the Member ID, which must stay a 10-digit number starting with `4392` and must not already belong to someone else.
+
+:::warning
+Names and roles normally come from the sign on management. Editing them here is a local correction; a later Clerk update or **Sync Clerk** run can overwrite them.
+:::
 
 ### QR Code
 
-Click **Show QR Code** to display a scannable QR code containing the member's ID. This can be screenshotted or printed and given to the member to use at the kiosk.
+Click **QR Code** to reveal a card with a scannable QR code containing the member's ID, ready to screenshot or print. Click **Hide** to collapse it again.
 
-### Year-to-Date Stats
+### Hours Range
 
-A summary card shows the member's total completed hours for the current year.
+A summary card shows the member's total completed hours and completed session count for the selected reporting range.
 
-### Session History
+### Reporting Range
 
-A full table of every clock session is shown, with columns for:
+The **Reporting Range** card sets the range used by this page only.
+
+- **Apply** shows the member's hours and sessions for the dates you picked.
+- **Reset** returns to the team's saved default range.
+- **Export Hours** downloads a CSV containing:
+  - Member and range details
+  - Raw completed session rows
+  - Daily hour totals
+  - Monday–Sunday weekly hour totals
+  - Total completed hours, completed session count, and the number of active sessions omitted from the export
+
+### Clock Sessions
+
+A table of clock sessions in the selected reporting range, with columns for:
 
 - **Date**
 - **Clock In** time
-- **Clock Out** time
+- **Clock Out** time — or an **Active** badge if the session is still running
 - **Duration**
 - Edit and delete buttons
 
 #### Adding a Session Manually
 
-Click **Add Session**, fill in the clock-in and clock-out times using the date/time pickers, and click **Save**.
+Click **Add Session**, fill in the clock-in and clock-out times using the date/time pickers, and click **Add Session**. Leave **Clock Out** blank to create an active (ongoing) session.
 
 #### Editing a Session
 
-Click the **pencil icon** on any row, adjust the times, and click **Save**.
+Click the **pencil icon** on any row, adjust the times, and click **Update**.
 
 #### Deleting a Session
 
 Click the **trash icon** on any row and confirm. Sessions that are still in progress (no clock-out time) can also be deleted this way.
 
+:::info
+Sessions can't overlap. If a new or edited session runs into another one for the same member, the save is rejected with "Session overlaps an existing session" — fix the other session's times first.
+:::
+
 ---
 
-## 6. Adding Mentor Accounts
+## 6. Manage Users
 
-Only a currently signed-in mentor can create new accounts — there is no public sign-up.
+The **Manage Users** page let you add and remove members from the team.
 
-1. Sign in to the mentor dashboard.
-2. In the left sidebar, click **Add Mentor Account**.
-3. Enter the new mentor's **email address** and a **temporary password**.
-4. Click **Create Account**.
-5. Share the credentials with the new mentor and ask them to sign in.
+### Inviting
 
-> Passwords cannot be changed from within the app. If a mentor needs a new password, delete their account and create a new one with a new password, or have your system administrator update it directly via the Convex dashboard.
+1. Open **Manage Users**.
+2. Click **Invite User**.
+3. Enter the person's email address and choose **Student** or **Mentor**.
+4. Send the invitation.
+
+A Member ID is generated automatically (a 10-digit number beginning with `4392`) after the invited user accepts and syncs into the roster. The member can find their assigned ID on their detail page, where a QR code can also be generated for printing.
+
+The invited person receives an email to accept the invitation and set their own password. Once accepted, they appear automatically in the Team Members roster with the role you selected.
+
+:::warning
+The email frequently goes to spam. Make sure to check the spam folder.
+:::
+
+### Removing
+
+Click the **trash icon** in a user's row and confirm. This deletes the account, the roster record, and all of that person's clock sessions. The app prevents you from removing the account you are currently signed in with.
+
+:::warning
+This action cannot be undone.
+:::
+
+### Sync Clerk
+
+**Sync Clerk** re-reads every account from sign on management and reconciles the local roster with it: missing people are created, changed names/emails/roles are updated, and roster rows whose Clerk account no longer exists are deleted. Use it if an invitation was accepted but the person never showed up in the roster, or if a role change didn't take effect.
+
+:::info
+Passwords are managed entirely by Clerk, not by this app. If someone needs a password reset, they can use the "forgot password" option on the sign-in form. Mentors can't reset passwords on a user's behalf.
+:::
+
+---
+
+## 7. Getting Around the Mentor Area
+
+The mentor area has a left sidebar (a **☰** menu button on phones and tablets) with:
+
+- **Dashboard**, **Team Members**, and **Manage Users** navigation
+- **← Deceivers Apps** — back to the team's app portal
+- **← Time Clock Kiosk** — open the kiosk on this browser
+
+The header on every mentor page has a **light / dark / system** theme switcher and your Clerk account button, which is where you manage your profile and sign out.
 
 ---
 
 ## Frequently Asked Questions
 
-**My Member ID doesn't work at the kiosk.**  
+**My Member ID doesn't work at the kiosk.**
 Ask a mentor to check that your name appears in the Team Members list and that your ID is correct. IDs are 10-digit numbers beginning with `4392`.
 
-**I forgot to clock out yesterday.**  
-Ask a mentor to open your Member Detail page, find the session with the missing clock-out time, and edit it to add the correct time.
+**I forgot to clock out yesterday.**
+Ask a mentor to open your Member Detail page, find the session showing an **Active** badge, and edit it to add the correct clock-out time.
 
-**The QR scanner isn't working.**  
-Make sure you are using Chrome or Edge (not Safari), and that you have granted camera permission to the site. If the browser doesn't support QR scanning, you can always type your Member ID manually instead.
+**The kiosk says "Already clocked in" or "Not clocked in."**
+Someone (or a stale session) already put you in the opposite state. A mentor can fix it from your Member Detail page by editing or deleting the session in question.
 
-**The kiosk shows the wrong hours.**  
-Hours shown are year-to-date (since January 1st of the current year) and include only completed sessions. A currently running session is shown separately as a live timer and is not counted in your total until you clock out.
+**The QR scanner isn't working.**
+Make sure the kiosk device has a camera and that you have granted camera permission to the site. You can always type your Member ID manually instead.
+
+**Why don't the kiosk and dashboard totals match?**
+The dashboard, roster, and exports count only completed sessions. The kiosk's **Range Hours** adds your currently running session on top, so it reads higher until you clock out.
+
